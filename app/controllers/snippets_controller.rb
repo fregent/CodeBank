@@ -35,7 +35,7 @@ class SnippetsController < ApplicationController
 
   private
 
-  def restaurant_params
+  def snippet_params
     params.require(:snippet).permit(:name, :content, :private, :language)
   end
 

@@ -13,9 +13,9 @@ class DirectoriesController < ApplicationController
   end
 
   def create
-    @directory= Directory.new(snippet_params)
+    @directory= Directory.new(directory_params)
     @directory.save
-    redirect_to pages_path(@snippet)
+    redirect_to pages_path(@directory)
   end
 
 
@@ -36,7 +36,7 @@ class DirectoriesController < ApplicationController
 
   private
 
-  def restaurant_params
+  def directory_params
     params.require(:directory).permit(:name,)
   end
 
