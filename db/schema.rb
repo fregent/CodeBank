@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_27_132613) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_28_140002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_27_132613) do
 
   create_table "snippets", force: :cascade do |t|
     t.string "name"
-    t.string "content"
+    t.text "content"
     t.boolean "private"
     t.string "language"
     t.datetime "created_at", null: false
