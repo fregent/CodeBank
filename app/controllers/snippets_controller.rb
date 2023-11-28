@@ -1,6 +1,10 @@
 class SnippetsController < ApplicationController
   def index
     @snippets = Snippet.all
+    @snippet = Snippet.new
+    @user = current_user
+    @user_snippets = @user.snippet
+    @snippet_counter = @snippets.count
   end
 
   def show
@@ -14,7 +18,7 @@ class SnippetsController < ApplicationController
   def create
     @snippet = Snippet.new(snippet_params)
     @snippet.save
-    redirect_to pages_path(@snippet)
+    redirect_to snippets_path(@snippet)
   end
 
 
@@ -30,7 +34,7 @@ class SnippetsController < ApplicationController
   def destroy
     @snippet = Snippet.find(params[:id])
     @snippet.destroy
-    redirect_to pages_path, status: :see_other
+    redirect_to snippets_path, status: :see_other
   end
 
   private
