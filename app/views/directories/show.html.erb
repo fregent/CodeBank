@@ -1,0 +1,18 @@
+<h2>Name of directory : <%= @directory.name %></h2>
+
+<h3>Snippets :</h3>
+<ul>
+  <% @directory.snippets.each do |snippet| %>
+    <li>
+      <h4><%= snippet.title %></h4>
+      <p><%= snippet.content %></p>
+      <p>Langage : <%= snippet.language %></p>
+    </li>
+  <% end %>
+</ul>
+
+
+<%= link_to "Delete",
+  directory_path(@directory),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>
