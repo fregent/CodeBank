@@ -67,7 +67,7 @@ if validation.include?("Y")
 
   # Snippet 1
   Snippet.create!(
-    title: "reset PG Database on Heroku",
+    name: "reset PG Database on Heroku",
     content: "heroku restart; heroku pg:reset DATABASE --confirm (replace by your app name); heroku run rake db:migrate",
     description: "Restarts Heroku, then resets the database of your application, before running all migrations on Heroku.",
     language: "Bash",
@@ -78,7 +78,7 @@ if validation.include?("Y")
 
   # Snippet 2
   Snippet.create!(
-    title: "clone repository from github",
+    name: "clone repository from github",
     content: "mkdir ~/code/OWNER_GITHUB_USERNAME
     cd ~/code/OWNER_GITHUB_USERNAME
     git clone git@github.com:OWNER_GITHUB_USERNAME/PROJECT_NAME.git
@@ -92,7 +92,7 @@ if validation.include?("Y")
 
   # Snippet 3
   Snippet.create!(
-    title: "merge master into your branch",
+    name: "merge master into your branch",
     content: "git status
     git checkout master
     git pull origin master
@@ -107,7 +107,7 @@ if validation.include?("Y")
 
   # Snippet 4
   Snippet.create!(
-    title: "create a new branch",
+    name: "create a new branch",
     content: "git checkout -b (new-branch-name)",
     description: "Creates a new branch from the current branch",
     language: "Bash",
@@ -118,8 +118,8 @@ if validation.include?("Y")
 
   # Snippet 5
   Snippet.create!(
-    title: "API parsing",
-    content: "\nrequire ‘open-uri’\nrequire ‘json’\nputs \“Cleaning up database...\“\nMovie.destroy_all\nputs \“Database cleaned\“\nurl = \“http://tmdb.lewagon.com/movie/top_rated\“\n10.times do |i|\n puts \“Importing movies from page \#{i + 1}\“\n movies = JSON.parse(URI.open(\“\#{url}?page=\#{i + 1}\“).read)[‘results’]\n movies.each do |movie|\n  puts \“Creating \#{movie[‘title’]}\“\n  base_poster_url = \“https://image.tmdb.org/t/p/original\“\n  Movie.create(\n   title: movie[‘title’],\n   overview: movie[‘overview’],\n   poster_url: \“\#{base_poster_url}\#{movie[‘backdrop_path’]}\“,\n   rating: movie[‘vote_average’]\n  )\n end\nend\nputs \“Movies created\“",
+    name: "API parsing",
+    content: "\nrequire ‘open-uri’\nrequire ‘json’\nputs \“Cleaning up database...\“\nMovie.destroy_all\nputs \“Database cleaned\“\nurl = \“http://tmdb.lewagon.com/movie/top_rated\“\n10.times do |i|\n puts \“Importing movies from page \#{i + 1}\“\n movies = JSON.parse(URI.open(\“\#{url}?page=\#{i + 1}\“).read)[‘results’]\n movies.each do |movie|\n  puts \“Creating \#{movie[‘title’]}\“\n  base_poster_url = \“https://image.tmdb.org/t/p/original\“\n  Movie.create(\n   name: movie[‘title’],\n   overview: movie[‘overview’],\n   poster_url: \“\#{base_poster_url}\#{movie[‘backdrop_path’]}\“,\n   rating: movie[‘vote_average’]\n  )\n end\nend\nputs \“Movies created\“",
     description: "Parse the API and save it in the database.",
     language: "Ruby",
     user_id: 1,
@@ -129,7 +129,7 @@ if validation.include?("Y")
 
   # Snippet 6
   Snippet.create!(
-    title: "create a new model on Rails",
+    name: "create a new model on Rails",
     content: "rails g model Movie title overview:text poster_url rating:integer",
     description: "Creates a new model on Rails. You can specify the attributes of the model, which are the columns in the table. They are strings by default.",
     language: "Ruby",
@@ -140,7 +140,7 @@ if validation.include?("Y")
 
   # Snippet 7
   Snippet.create!(
-    title: "create a new controller on Rails",
+    name: "create a new controller on Rails",
     content: "rails g controller movies index",
     description: "Creates a new controller on Rails. You can specify the actions that the controller will handle.",
     language: "Ruby",
@@ -151,7 +151,7 @@ if validation.include?("Y")
 
   # Snippet 8
   Snippet.create!(
-    title: "close a local-host port",
+    name: "close a local-host port",
     content: "npx kill-port 3000",
     description: "Closes a local-host port.",
     language: "Bash",
