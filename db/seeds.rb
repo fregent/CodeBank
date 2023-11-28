@@ -68,7 +68,7 @@ if validation.include?("Y")
   # Snippet 1
   Snippet.create!(
     title: "reset PG Database on Heroku",
-    code: "heroku restart; heroku pg:reset DATABASE --confirm (replace by your app name); heroku run rake db:migrate",
+    content: "heroku restart; heroku pg:reset DATABASE --confirm (replace by your app name); heroku run rake db:migrate",
     description: "Restarts Heroku, then resets the database of your application, before running all migrations on Heroku.",
     language: "Bash",
     user_id: 1,
@@ -79,7 +79,7 @@ if validation.include?("Y")
   # Snippet 2
   Snippet.create!(
     title: "clone repository from github",
-    code: "mkdir ~/code/OWNER_GITHUB_USERNAME
+    content: "mkdir ~/code/OWNER_GITHUB_USERNAME
     cd ~/code/OWNER_GITHUB_USERNAME
     git clone git@github.com:OWNER_GITHUB_USERNAME/PROJECT_NAME.git
     cd PROJECT_NAME",
@@ -93,7 +93,7 @@ if validation.include?("Y")
   # Snippet 3
   Snippet.create!(
     title: "merge master into your branch",
-    code: "git status
+    content: "git status
     git checkout master
     git pull origin master
     git checkout (your-branch-name)
@@ -108,7 +108,7 @@ if validation.include?("Y")
   # Snippet 4
   Snippet.create!(
     title: "create a new branch",
-    code: "git checkout -b (new-branch-name)",
+    content: "git checkout -b (new-branch-name)",
     description: "Creates a new branch from the current branch",
     language: "Bash",
     user_id: 4,
@@ -119,14 +119,14 @@ if validation.include?("Y")
   # Snippet 5
   Snippet.create!(
     title: "API parsing",
-    code: "require 'open-uri'
+    content: "require 'open-uri'
     require 'json'
     puts 'Cleaning up database...'
     Movie.destroy_all
     puts 'Database cleaned'
     url = 'http://tmdb.lewagon.com/movie/top_rated'
     10.times do |i|" +
-      "puts 'Importing movies from page #{i + 1}'"
+      "puts 'Importing movies from page #{i + 1}"
       "movies = JSON.parse(URI.open('#{url}?page=#{i + 1}').read)['results']
       movies.each do |movie|
         puts 'Creating #{movie["title"]}'
@@ -150,7 +150,7 @@ if validation.include?("Y")
   # Snippet 6
   Snippet.create!(
     title: "create a new model on Rails",
-    code: "rails g model Movie title overview:text poster_url rating:integer",
+    content: "rails g model Movie title overview:text poster_url rating:integer",
     description: "Creates a new model on Rails. You can specify the attributes of the model, which are the columns in the table. They are strings by default.",
     language: "Ruby",
     user_id: 1,
@@ -161,7 +161,7 @@ if validation.include?("Y")
   # Snippet 7
   Snippet.create!(
     title: "create a new controller on Rails",
-    code: "rails g controller movies index",
+    content: "rails g controller movies index",
     description: "Creates a new controller on Rails. You can specify the actions that the controller will handle.",
     language: "Ruby",
     user_id: 1,
@@ -172,7 +172,7 @@ if validation.include?("Y")
   # Snippet 8
   Snippet.create!(
     title: "close a local-host port",
-    code: "npx kill-port 3000",
+    content: "npx kill-port 3000",
     description: "Closes a local-host port.",
     language: "Bash",
     user_id: 1,
