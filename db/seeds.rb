@@ -119,27 +119,7 @@ if validation.include?("Y")
   # Snippet 5
   Snippet.create!(
     title: "API parsing",
-    content: "require 'open-uri'
-    require 'json'
-    puts 'Cleaning up database...'
-    Movie.destroy_all
-    puts 'Database cleaned'
-    url = 'http://tmdb.lewagon.com/movie/top_rated'
-    10.times do |i|" +
-      "puts 'Importing movies from page #{i + 1}"
-      "movies = JSON.parse(URI.open('#{url}?page=#{i + 1}').read)['results']
-      movies.each do |movie|
-        puts 'Creating #{movie["title"]}'
-        base_poster_url = 'https://image.tmdb.org/t/p/original'
-        Movie.create(
-          title: movie['title'],
-          overview: movie['overview'],
-          poster_url: '#{base_poster_url}#{movie["backdrop_path"]}',
-          rating: movie['vote_average']
-        )
-      end
-    end
-    puts 'Movies created'",
+    content: "\nrequire ‘open-uri’\nrequire ‘json’\nputs \“Cleaning up database...\“\nMovie.destroy_all\nputs \“Database cleaned\“\nurl = \“http://tmdb.lewagon.com/movie/top_rated\“\n10.times do |i|\n puts \“Importing movies from page \#{i + 1}\“\n movies = JSON.parse(URI.open(\“\#{url}?page=\#{i + 1}\“).read)[‘results’]\n movies.each do |movie|\n  puts \“Creating \#{movie[‘title’]}\“\n  base_poster_url = \“https://image.tmdb.org/t/p/original\“\n  Movie.create(\n   title: movie[‘title’],\n   overview: movie[‘overview’],\n   poster_url: \“\#{base_poster_url}\#{movie[‘backdrop_path’]}\“,\n   rating: movie[‘vote_average’]\n  )\n end\nend\nputs \“Movies created\“",
     description: "Parse the API and save it in the database.",
     language: "Ruby",
     user_id: 1,
