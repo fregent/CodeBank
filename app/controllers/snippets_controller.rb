@@ -22,8 +22,6 @@ class SnippetsController < ApplicationController
     end
   end
 
-
-
   def edit
     @snippet = Snippet.find(params[:id])
   end
@@ -33,10 +31,18 @@ class SnippetsController < ApplicationController
     @snippet.update(params[:snippet])
   end
 
+
   def destroy
     @snippet = Snippet.find(params[:id])
+    @user = current_user
+    @user_destroyer = @snippet.user
     @snippet.destroy
-    redirect_to snippets_path, status: :see_other
+
+    if @user == @user_destroyer
+      @snippet.destroy
+      flash[:notice] = "Snippet supprimée avec succès."
+    end
+    redirect_to snippets_path
   end
 
   private
