@@ -13,9 +13,9 @@ class DirectoriesController < ApplicationController
   end
 
   def create
-    @directory= Directory.new(directory_params)
+    @directory= current_user.directories.build(directory_params)
     @directory.save
-    redirect_to pages_path(@directory)
+    redirect_to directories_path(@directories)
   end
 
 
@@ -37,7 +37,7 @@ class DirectoriesController < ApplicationController
   private
 
   def directory_params
-    params.require(:directory).permit(:name,)
+    params.require(:directory).permit(:name)
   end
 
 end
