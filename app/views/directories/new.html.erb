@@ -1,2 +1,17 @@
-<h1>Directories#new</h1>
-<%= render "shared/form" %>
+<h1> New Directory</h1>
+<form>
+
+  <div class="mb-3">
+    <label for="exampleInputName1" class="form-label">name</label>
+    <input type="name" class="form-control" id="exampleInputName1">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Private</label>
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Public</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,6 +1,3 @@
 class Snippet < ApplicationRecord
-
-  belongs_to :directory
-
-
+  has_many :directories
 end
