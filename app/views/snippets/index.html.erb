@@ -23,3 +23,22 @@
 
           <%end%>
           </div>
+
+<!-- app/views/your_controller_name/index.html.erb -->
+
+<div class="code-container d-flex justify-content-center">
+<div id="monaco-editor-container" style="height: 150px; width: 300px"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.27.0/min/vs' }});
+    require(['vs/editor/editor.main'], function() {
+      var editor = monaco.editor.create(document.getElementById('monaco-editor-container'), {
+        value: "'Hello world'",
+        language: 'javascript',
+        theme: 'vs-dark'
+      });
+    });
+  });
+</script>
