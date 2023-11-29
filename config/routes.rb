@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
-
-  resources :snippets do
-    resources :directories
-  end
-
-   resources :snippets
+  resources :snippets
+  resources :directories
 
   devise_for :users
   root to: "snippets#index"
