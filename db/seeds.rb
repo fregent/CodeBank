@@ -28,7 +28,7 @@ if validation.include?("Y")
     email: "selma@codebank.com",
     password: "123456",
     password_confirmation: "123456",
-    # admin: true
+    admin: true
   )
 
   # Fred
@@ -39,7 +39,7 @@ if validation.include?("Y")
     email: "fred@codebank.com",
     password: "123456",
     password_confirmation: "123456",
-    # admin: true
+    admin: true
   )
 
   # André
@@ -50,7 +50,7 @@ if validation.include?("Y")
     email: "andre@codebank.com",
     password: "123456",
     password_confirmation: "123456",
-    # admin: true
+    admin: true
   )
 
 
@@ -62,7 +62,7 @@ if validation.include?("Y")
     email: "emeraude@codebank.com",
     password: "123456",
     password_confirmation: "123456",
-    # admin: true
+    admin: true
   )
 
   # Snippet 1
