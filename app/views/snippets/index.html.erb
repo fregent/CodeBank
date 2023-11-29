@@ -1,25 +1,20 @@
 <%= render "shared/modal_snippet", snippets: @snippet %>
 
- <div class= "">
-          <% @snippets.each do |snippet| %>
-              <div>
-                <p>
-                 <%=snippet.name%>
-              </p>
-              </div>
-              <br>
-              <p>
-                <%=snippet.content%>
-              </p>
-              <p>
-                <%=snippet.language%>
-              </p>
-            </div>
-            <br>
+<% @snippets.each do |snippet| %>
+  <%# <% if current_user == snippet.user %>
+    <%# <%= link_to "Supprimer", snippets_path(snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sm " %>
+  <%# <% end %>
+  <div class="container m-5">
+    <div class="flex-container">
+      <div class="flex-item">
+        <h3>My recents</h3>
 
-              <%# <% if current_user == snippet.user %>
-                <%# <%= link_to "Supprimer", snippets_path(snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sm " %>
-              <%# <% end %>
-
-          <%end%>
+        <div class="snippets">
+          <div class="snippet-category">
+            <%=snippet.name%>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
