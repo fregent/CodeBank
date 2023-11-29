@@ -73,7 +73,6 @@ if validation.include?("Y")
     language: "Bash",
     user_id: 1,
     private: false,
-    upvotes: 0
   )
 
   # Snippet 2
@@ -87,7 +86,6 @@ if validation.include?("Y")
     language: "Bash",
     user_id: 2,
     private: false,
-    upvotes: 0
   )
 
   # Snippet 3
@@ -102,7 +100,7 @@ if validation.include?("Y")
     language: "Bash",
     user_id: 3,
     private: false,
-    upvotes: 0
+
   )
 
   # Snippet 4
@@ -113,7 +111,6 @@ if validation.include?("Y")
     language: "Bash",
     user_id: 4,
     private: false,
-    upvotes: 0
   )
 
   # Snippet 5
@@ -124,7 +121,6 @@ if validation.include?("Y")
     language: "Ruby",
     user_id: 1,
     private: false,
-    upvotes: 0
   )
 
   # Snippet 6
@@ -135,7 +131,6 @@ if validation.include?("Y")
     language: "Ruby",
     user_id: 1,
     private: false,
-    upvotes: 0
   )
 
   # Snippet 7
@@ -146,7 +141,6 @@ if validation.include?("Y")
     language: "Ruby",
     user_id: 1,
     private: false,
-    upvotes: 0
   )
 
   # Snippet 8
@@ -157,7 +151,6 @@ if validation.include?("Y")
     language: "Bash",
     user_id: 1,
     private: false,
-    upvotes: 0
   )
 
   puts "Finished!"
