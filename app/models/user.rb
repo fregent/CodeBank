@@ -4,5 +4,5 @@ class User < ApplicationRecord
   has_many :snippets, dependent: :destroy
   has_many :directories, dependent: :destroy
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :lockable, :trackable
+         :recoverable, :rememberable, :validatable
 end
