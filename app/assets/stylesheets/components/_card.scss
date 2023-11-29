@@ -1,9 +1,9 @@
 .card {
-  background-color: lightgray;
+  // background-color: lightgray;
   position: relative;
   width: 190px;
   height: 254px;
-  // color: #fff;
+  color: #fff;
   transition: 0.5s;
   cursor: pointer;
   border: transparent;
@@ -20,7 +20,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  // background: linear-gradient(45deg, #7510d4, #000000);
+  background: linear-gradient(45deg, #7510d4, #000000);
   border-radius: 1.2em;
 }
 
@@ -31,7 +31,7 @@
   left: 6px;
   right: 6px;
   bottom: 6px;
-  // background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 2;
   border-radius: 1em;
 }
@@ -85,8 +85,58 @@
 }
 
 .card-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin-left: 150px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+}
+
+code {
+  color: #fff;
+}
+
+.btn-sup {
+  background-color: mediumslateblue;
+  color: #fff;
+  border: transparent;
+}
+
+a {
+  color: white;
+}
+
+.edit-form .show-code {
+  margin-left: 200px;
+  margin-top: 50px;
+display: flex;
+justify-content: center;
+flex-direction: column;
+  width: 850px;
+}
+
+#your-textarea {
+  height: 275px;
+}
+
+.edit-pen {
+  font-size: 20px;
+  background-color: transparent;
+  color: rgb(170, 170, 170);
+  border: transparent;
+}
+
+.edit-pen:hover {
+  font-size: 21px;
+  background-color: transparent;
+  color: rgb(170, 170, 170);
+  border: transparent;
+}
+
+textarea {
+  font-size: 20px;
+  width: 600px;
+  background-color: rgb(24, 24, 24);
+  color: white;
+  border: transparent;
 }

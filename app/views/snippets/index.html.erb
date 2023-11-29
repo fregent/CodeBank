@@ -2,11 +2,13 @@
 
  <div class= "card-container">
           <% @snippets.each do |snippet| %>
+          <%= link_to snippet_path(snippet), class:"text-decoration-none" do %>
+          <div class="combine">
           <div class="card">
                 <span>
               <div class="content">
                 <h3>
-                 <%=snippet.name%>
+                 <%=snippet.name.capitalize%>
               </h3>
               <br>
               <code class="content-snippet"> <%=simple_format(snippet.content)%> </code>
@@ -14,14 +16,20 @@
                 <%=snippet.language%>
               </p>
               </div>
-              <% if current_user == snippet.user%>
-                <%= link_to "Supprimer", snippet_path(snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sm " %>
-              <% end %>
+               <% end %>
             </div>
+              <% if current_user == snippet.user%>
+                <%= link_to "Supprimer", snippet_path(snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" %>
+              <% end %>
+              <%= link_to edit_snippet_path(snippet), class: "btn btn-info edit-pen" do%>
+              <i class="fa-sharp fa-solid fa-pencil"></i>
+              <% end %>
             </span>
-            <br>
+              </div>
           <%end%>
 </div>
+
+
 
 
 
