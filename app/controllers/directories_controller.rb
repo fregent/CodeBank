@@ -22,7 +22,6 @@ class DirectoriesController < ApplicationController
     end
   end
 
-
   def edit
     @directory = Directory.find(params[:id])
   end
