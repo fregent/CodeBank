@@ -1,2 +1,28 @@
-<h1>Directories#new</h1>
-<p>Find me in app/views/directories/new.html.erb</p>
+<h1> New Directory</h1>
+
+<%# <form class="simple_form form" id="new_directory" novalidate="novalidate" action="/directories" accept-charset="UTF-8" method="post">
+
+  <div class="mb-3">
+    <label for="exampleInputName1" class="form-label">name</label>
+    <input type="name" class="form-control" id="exampleInputName1">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Private</label>
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Public</label>
+  </div>
+
+
+ <input type="submit" name="commit" value="Create" class="btn btn-primary btn-block" data-disable-with="Submit">
+
+</form> %>
+
+<%= simple_form_for(@directory) do |f|%>
+
+ <%=  f.input :name %>
+ <%# <%=  f.input_field :remember_me, as: :boolean%>
+ <%= f.button :submit %>
+ <% end %>
