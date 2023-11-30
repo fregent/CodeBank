@@ -3,6 +3,15 @@ gem "devise"
 
 ruby "3.1.2"
 
+# sexp_processor branches from ParseTree bringing all the generic sexp processing tools with it
+gem 'sexp_processor', '~> 4.16'
+
+# ruby_parser is used by the sprockets-rails gem to parse the assets pipeline manifest
+gem 'ruby_parser', '~> 3.20', '>= 3.20.3'
+
+# ruby2ruby is used by the sprockets-rails gem to convert the assets pipeline manifest to Ruby code
+gem 'ruby2ruby', '~> 2.5'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.2"
 
