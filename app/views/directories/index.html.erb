@@ -1,7 +1,9 @@
 
  <h1>directory<h1>
 <ul>
-  <% @directories.each do |directory| %>
-    <li><%= directory.name %></li>
-  <% end %>
+  <div class= "card-container card text-decoration-none combine  "  >
+    <% @directories.each do |directory| %>
+      <span><%= directory.name %></span>
+    <% end %>
+  </div>
 </ul>
