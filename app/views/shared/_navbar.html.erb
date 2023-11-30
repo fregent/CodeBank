@@ -1,6 +1,5 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-
     <%= link_to snippets_path, class: "navbar-brand" do %>
       <svg width="150" height="50" viewBox="-4 0 373.667 67.036">
         <path d="M77.615 56.652H72.35V16.685A1.685 1.685 0 0 0 70.667 15H4.666a1.685 1.685 0 0 0-1.684 1.685v39.967h-5.264A1.718 1.718 0 0 0-4 58.369v1.737c0 .086.007.17.018.255.44 2.934 2.79 6.206 5.966 6.602.07.008.141.014.21.014l70.425.06h.002c3.67 0 6.337-3.498 6.701-6.738.008-.063.011-.127.011-.192V58.37a1.718 1.718 0 0 0-1.718-1.718zM6.35 18.369h62.633V56.65H45.987c-.11 0-.218.013-.321.033H30.3a1.725 1.725 0 0 0-.33-.033H6.35V18.37zm66.273 45.23-70.301-.06c-1.218-.217-2.52-1.8-2.862-3.452h29.238c.585 1.038 1.681 1.737 2.933 1.737h12.694c1.251 0 2.346-.699 2.933-1.737h28.625c-.268 1.694-1.672 3.512-3.26 3.512zM28.367 30.59a1.736 1.736 0 0 0-2.456 0l-7.241 7.241a1.737 1.737 0 0 0 0 2.457l7.24 7.24a1.733 1.733 0 0 0 2.457 0 1.736 1.736 0 0 0 0-2.456l-6.013-6.013 6.013-6.013a1.737 1.737 0 0 0 0-2.456zm17.1 16.938a1.734 1.734 0 0 0 2.457 0l7.24-7.24a1.737 1.737 0 0 0 0-2.457l-7.24-7.24a1.737 1.737 0 1 0-2.456 2.455l6.013 6.013-6.013 6.013a1.736 1.736 0 0 0 0 2.456zm-14.64 3.71a1.737 1.737 0 0 0 2.331-.777L43.58 29.62a1.736 1.736 0 0 0-.778-2.33 1.74 1.74 0 0 0-2.33.776L30.05 48.91a1.736 1.736 0 0 0 .776 2.33z" xmlns="http://www.w3.org/2000/svg" fill="#00043c"/>
@@ -14,11 +13,18 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
+
+         <%= form_with url: snippets_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Type a keyword"
+        %>
+      <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+    <% end %>
+
         <% if user_signed_in? %>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
           </a>
@@ -28,6 +34,8 @@
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
+
+
         <% else %>
           <li class="nav-item">
             <%= link_to "Login", new_user_session_path, class: "nav-link btn btn-outline-primary" %>

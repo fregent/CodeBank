@@ -14,8 +14,6 @@ if validation.include?("Y")
 
   puts "Cleaning database..."
   User.destroy_all
-  Snippet.destroy_all
-
   puts "Creating new users..."
 
   # Create Users
