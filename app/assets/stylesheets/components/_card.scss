@@ -7,6 +7,7 @@
   transition: 0.5s;
   cursor: pointer;
   border: transparent;
+  background-color: transparent;
 }
 
 .card:hover {
@@ -86,10 +87,12 @@
 
 .card-container {
   max-width: 1200px;
-  margin-left: 150px;
+  // margin-left: 150px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  gap: 5px;
+  // justify-content: space-between;
+
 }
 
 code {
@@ -165,7 +168,13 @@ margin-bottom: 0px;
 
   .code-title {
     text-decoration: underline;
-    margin-top: 65px;
     margin-bottom: 28px;
   }
-  
+
+  .content h3 {
+font-size: 18px;
+  }
+
+.back-btn {
+  color: #000000;
+}
