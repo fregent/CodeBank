@@ -1,4 +1,4 @@
 class Directory < ApplicationRecord
   belongs_to :user
-  has_many :snippets, through: :user
+  has_and_belongs_to_many :snippets
 end

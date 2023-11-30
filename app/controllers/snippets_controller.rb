@@ -16,7 +16,7 @@ class SnippetsController < ApplicationController
     @snippet = current_user.snippets.build(snippet_params)
 
     if @snippet.save
-      redirect_to user_snippet_path(@snippet)
+      redirect_to snippet_path(@snippet)
       flash[:notice] = "Snippet created with success."
     else
       render :new
@@ -32,7 +32,7 @@ class SnippetsController < ApplicationController
     @snippet = Snippet.find(params[:id])
     @user = current_user
     @snippet.update(snippet_params)
-    redirect_to user_snippet_path
+    redirect_to snippet_path
     flash[:notice] = "Snippet updated with success."
   end
 
@@ -47,7 +47,7 @@ class SnippetsController < ApplicationController
       flash[:notice] = "Snippet deleted with success."
       @snippet.destroy
     end
-    redirect_to user_snippets_path
+    redirect_to snippets_path
   end
 
   private
