@@ -109,10 +109,10 @@ a {
 .edit-form .show-code {
   margin-left: 200px;
   margin-top: 50px;
-display: flex;
-justify-content: center;
-flex-direction: column;
-  width: 850px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 150px;
 }
 
 #your-textarea {
@@ -134,9 +134,38 @@ flex-direction: column;
 }
 
 textarea {
-  font-size: 20px;
+  font-size: 16px;
   width: 600px;
-  background-color: rgb(24, 24, 24);
+  height: 450px;
+  background-color: rgb(25, 25, 25);
   color: white;
   border: transparent;
 }
+
+.code-bar {
+width: 600px;
+border: solid;
+border-top-right-radius: 5px;
+border-top-left-radius: 5px;
+background-color: rgb(70, 70, 70);
+
+}
+
+.show-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.code-bar h6 {
+padding: 5px 3px 5px 6px;
+margin-bottom: 0px;
+ color: #fff;
+  }
+
+  .code-title {
+    text-decoration: underline;
+    margin-top: 65px;
+    margin-bottom: 28px;
+  }
+  
