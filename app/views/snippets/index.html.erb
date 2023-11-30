@@ -1,25 +1,71 @@
 <%= render "shared/modal_snippet", snippets: @snippet %>
 
- <div class= "">
+
+ <div class= "card-container">
           <% @snippets.each do |snippet| %>
-              <div>
+          <%= link_to snippet_path(snippet), class:"text-decoration-none" do %>
+          <div class="combine">
+          <div class="card">
+                <span>
+              <div class="content">
                 <h3>
-                 <%=snippet.name%>
+                 <%=snippet.name.capitalize%>
               </h3>
-              </div>
               <br>
-              <p>
-                <%=snippet.content%>
-              </p>
+              <code class="content-snippet"> <%=simple_format(snippet.content)%> </code>
               <p>
                 <%=snippet.language%>
               </p>
+              </div>
+               <% end %>
             </div>
-            <br>
-
               <% if current_user == snippet.user%>
-                <%= link_to "Supprimer", snippets_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sm " %>
+                <%= link_to "Supprimer", snippet_path(snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" %>
               <% end %>
-
+              <%= link_to edit_snippet_path(snippet), class: "btn btn-info edit-pen" do%>
+              <i class="fa-sharp fa-solid fa-pencil"></i>
+              <% end %>
+            </span>
+              </div>
           <%end%>
-          </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- app/views/your_controller_name/index.html.erb -->
+
+<%# <div class="code-container d-flex justify-content-center">
+<div id="monaco-editor-container" style="height: 150px; width: 300px"></div>
+</div> %>
+
+    <%# <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.27.0/min/vs' }});
+        require(['vs/editor/editor.main'], function() {
+          var editor = monaco.editor.create(document.getElementById('monaco-editor-container'), {
+            value: "'Hello world'",
+            language: 'javascript',
+            theme: 'vs-dark'
+          });
+        });
+      });
+    </script> %>
+
+
+
+
+         

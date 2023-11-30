@@ -1,4 +1,4 @@
-# This file is auto-generated from the current state of the database. Instead
+g# This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_29_133338) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_29_151450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_29_133338) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "private", default: true
+<<<<<<< HEAD
+=======
+    t.integer "shared_count", default: 0
+>>>>>>> master
     t.index ["user_id"], name: "index_directories_on_user_id"
   end
 
@@ -32,7 +36,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_29_133338) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.text "description"
-    t.integer "upvotes", default: 0
+    t.integer "likes", default: 0
+    t.integer "views", default: 0
+    t.integer "comments_count", default: 0
+    t.integer "shares_count", default: 0
     t.index ["user_id"], name: "index_snippets_on_user_id"
   end
 

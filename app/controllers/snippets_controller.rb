@@ -17,26 +17,37 @@ class SnippetsController < ApplicationController
 
     if @snippet.save
       redirect_to snippet_path(@snippet)
+      flash[:notice] = "Snippet created with success."
     else
       render :new
     end
   end
 
-
-
   def edit
     @snippet = Snippet.find(params[:id])
+    @user = current_user
   end
 
   def update
     @snippet = Snippet.find(params[:id])
-    @snippet.update(params[:snippet])
+    @user = current_user
+    @snippet.update(snippet_params)
+    redirect_to snippet_path
+    flash[:notice] = "Snippet updated with success."
   end
+
 
   def destroy
     @snippet = Snippet.find(params[:id])
+    @user = current_user
+    @user_destroyer = @snippet.user
     @snippet.destroy
-    redirect_to snippets_path, status: :see_other
+
+    if @user == @user_destroyer
+      flash[:notice] = "Snippet deleted with success."
+      @snippet.destroy
+    end
+    redirect_to snippets_path
   end
 
   private

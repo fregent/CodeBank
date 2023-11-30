@@ -13,11 +13,14 @@ class DirectoriesController < ApplicationController
   end
 
   def create
-    @directory= current_user.directories.build(directory_params)
-    @directory.save
-    redirect_to directories_path(@directories)
-  end
+    @directory = current_user.directorys.build(directory_params)
 
+    if @directory.save
+      redirect_to directory_path(@directory)
+    else
+      render :new
+    end
+  end
 
   def edit
     @directory = Directory.find(params[:id])

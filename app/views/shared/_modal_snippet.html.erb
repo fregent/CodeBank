@@ -20,8 +20,10 @@
           <%= simple_form_for [@snippet] do |f| %>
             <div>
               <%= f.input :name, as: :string, label: 'Title:', placeholder: "Type your code's title here...", input_html: { style: 'border-color: black;' } %>
-              <%= f.input :content, as: :text, label: 'Your code:', placeholder: "Enter your code here", input_html: { style: 'border-color: black;' } %>
-              <%= f.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Obejective-C", "C++", "C#"], label: 'Select the language of your code:', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
+              <%= f.input :content, as: :text, label: 'Your code:', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window' , id: 'your-textarea' } %>
+              <%= f.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code:', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
+
+            
               <%= f.input :private, as: :boolean, label: 'Make it private?', checked_value: 'positive', unchecked_value: 'negative', input_html: { style: 'border-color: black;' } %>
               <%= f.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
             </div>
