@@ -3,7 +3,7 @@ class Directory < ApplicationRecord
   multisearchable against: [:name]
 
   belongs_to :user
-  has_many :snippets
+  has_and_belongs_to_many :snippets
 end
 
 PgSearch::Multisearch.rebuild(Snippet)
