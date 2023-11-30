@@ -1,5 +1,6 @@
 <%= render "shared/modal_snippet", snippets: @snippet %>
 
+
  <div class= "card-container">
           <% @snippets.each do |snippet| %>
           <%= link_to snippet_path(snippet), class:"text-decoration-none" do %>
@@ -8,7 +9,7 @@
                 <span>
               <div class="content">
                 <h3>
-                 <%=snippet.name.capitalize%>
+                 <%=snippet.title.capitalize%>
               </h3>
               <br>
               <code class="content-snippet"> <%=simple_format(snippet.content)%> </code>
@@ -63,11 +64,3 @@
         });
       });
     </script> %>
-
-
-
-
-          <br>
-          <br>
-          <br>
-          <br>
