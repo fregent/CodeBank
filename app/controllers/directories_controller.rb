@@ -13,10 +13,10 @@ class DirectoriesController < ApplicationController
   end
 
   def create
-    @directory = current_user.directorys.build(directory_params)
+    @directory = current_user.directories.build(directory_params)
 
     if @directory.save
-      redirect_to directory_path(@directory)
+      redirect_to directories_path(@directory)
     else
       render :new
     end
