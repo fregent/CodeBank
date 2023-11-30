@@ -9,6 +9,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    ace-rails (0.0.2)
     actioncable (7.1.2)
       actionpack (= 7.1.2)
       activesupport (= 7.1.2)
@@ -290,6 +291,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  ace-rails
   autoprefixer-rails
   bootsnap
   bootstrap (~> 5.2)

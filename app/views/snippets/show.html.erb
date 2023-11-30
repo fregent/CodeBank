@@ -1,5 +1,12 @@
 
-  
-  <h2><%= @snippet.name %></h2>
-  <p><%= @snippet.content %></p>
-  <p><%= @snippet.language%></p>
+<div class="show-code">
+  <div><h6><p><%= @snippet.language%></p></h6></div>
+  <textarea name="code-view" cols="30" rows="10"><%= simple_format(@snippet.content) %></textarea>
+
+  <% if @snippet.private == true%>
+ <p>Snippet Status: Private</p>
+  <%else%>
+  <p>Snippet Status: Public</p>
+  <%end%>
+
+</div>  <h2><%= @snippet.name %></h2>
