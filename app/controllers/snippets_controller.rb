@@ -88,6 +88,16 @@ class SnippetsController < ApplicationController
     redirect_to snippet_path
   end
 
+  def last_viewed
+    @snippet = Snippet.find(params[:id])
+    @snippet.update(last_viewed: Time.now)
+    redirect_to snippet_path
+  end
+
+  def recently_viewed
+    @snippets = Snippet.order(last_viewed: :desc).limit(3)
+  end
+
   private
 
   def snippet_params

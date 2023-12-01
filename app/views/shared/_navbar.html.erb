@@ -21,22 +21,18 @@
 
         <% if user_signed_in? %>
 
-
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
           </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Dashboard", "#", class: "dropdown-item" %>
-              <%= link_to "My Recents", "#", class: "dropdown-item" %>
-              <%= link_to "My Favorites", "#", class: "dropdown-item" %>
-              <%= link_to "Popular", "#", class: "dropdown-item" %>
-              <%= link_to "My Groups", "#", class: "dropdown-item" %>
-              <%= link_to "My Settings", "#", class: "dropdown-item" %>
-              <%= link_to "Log Out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
 
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <%= link_to "Dashboard", snippets_path, class: "dropdown-item" %>
+            <%= link_to "My Favorites", "#", class: "dropdown-item" %>
+            <%= link_to "Popular", "#", class: "dropdown-item" %>
+            <%= link_to "My Groups", "#", class: "dropdown-item" %>
+            <%= link_to "My Settings", "#", class: "dropdown-item" %>
+            <%= link_to "Log Out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+          </div>
 
         <% else %>
           <li class="nav-item">
