@@ -1,19 +1,37 @@
 <%= link_to "<= Go back",  snippets_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
-        <% if current_user == @snippet.user%>
-                <%= link_to "Supprimer", snippet_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" %>
-              <% end %>
 
-              <% if current_user == @snippet.user%>
-                  <%= link_to edit_snippet_path(@snippet), class: "btn btn-info edit-pen" do%>
-                    <i class="fa-sharp fa-solid fa-pencil"></i>
-              <% end %>
-              <% end %>
+ <div class="buttons-action d-flex justify-content-end">
+        <% if current_user == @snippet.user %>
+          <%= link_to snippet_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
+            <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
+          <% end %>
+        <% end %>
+
+        <% if current_user == @snippet.user %>
+          <%= link_to edit_snippet_path(@snippet), class: "btn btn-info edit-pen" do %>
+            <i class="fa-solid fa-pencil fa-bounce"></i>
+          <% end %>
+        <% end %>
+      </div>
 
 <div class="show-container">
    <h2 class="code-title"><%= @snippet.title&.capitalize %></h2>
     <div class="show-code">
-      <div class="code-bar"><h6><%= @snippet.language%></h6></div>
-      <textarea name="code-view" cols="30" rows="10"><%= simple_format(@snippet.content) %></textarea>
+
+      <div class="code-bar"  data-controller="copy-to-clipboard">
+        <h6><%= @snippet.language%></h6>
+            <button
+            data-action="click->copy-to-clipboard#copy"
+            data-copy-to-clipboard-target="action"
+            data-copy-to-clipboard-button-text-value="Copied!"
+            class="btn">
+            <i class="fa-regular fa-clipboard fa-fade" style="color: #bababa;"></i>
+          </button>
+            <textarea name="code-view" cols="30" rows="10" data-copy-to-clipboard-target="input"><%= simple_format(@snippet.content) %></textarea>
+         </div>
+
+
+
 
       <% if @snippet.private == true%>
         <p class="snippet-status">Snippet Status: Private</p>

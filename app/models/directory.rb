@@ -7,5 +7,6 @@ class Directory < ApplicationRecord
                     trigram: { threshold: 0.3 }
                   }
   belongs_to :user
-  has_and_belongs_to_many :snippets
+  has_many :directory_snippets
+  has_many :snippets, through: :directory_snippets
 end

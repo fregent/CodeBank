@@ -1,9 +1,29 @@
 
- <h1>directory<h1>
-<ul>
-  <div class= "card-container card text-decoration-none combine  "  >
-    <% @directories.each do |directory| %>
-      <span><%= directory.name %></span>
+ <h1>Directories</h1>
+
+
+<%= render "shared/modal_directory", directories: @directory %>
+
+<% if @search_results.present? %>
+  <% if @search_results.count == 1 %>
+    <h2>1 result found</h2>
+  <% else %>
+    <h2><%= @search_results.count %> results found:</h2>
+  <% end %>
+  <div class="card-container">
+    <% @search_results.each do |result| %>
+      <% if result.searchable_type == 'Snippet' %>
+        <%= render "shared/cards", snippet: result.searchable %>
+      <% elsif result.searchable_type == 'Directory' %>
+        <%= render "shared/directory_cards", directory: result.searchable %>
+      <% end %>
     <% end %>
   </div>
-</ul>
+
+<% else %>
+  <div class="card-container">
+    <% @directories.each do |directory| %>
+      <%= render "shared/directory_cards", directory: directory %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+
+
+<%= link_to directory_path(directory), class:"text-decoration-none" do %>
+
+          <div class="card">
+                <span>
+              <div class="content">
+                <h3 class="directory-title">
+                 <%=directory.name&.capitalize%>
+              </h3>
+              <br>
+
+              <div class="buttons-action">
+            <% if current_user == directory.user%>
+                <%= link_to directory_path(directory), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce directory?" }, class: "btn btn-info btn-sup" do%>
+                <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
+              <% end %>
+            <% end %>
+              <% if current_user == directory.user%>
+                  <%= link_to edit_directory_path(directory), class: "btn btn-info edit-pen" do%>
+                  <i class="fa-solid fa-pencil fa-bounce"></i>
+                <% end %>
+              <% end %>
+              </div>
+
+              </div>
+               <% end %>
+            </div>
+             </span>

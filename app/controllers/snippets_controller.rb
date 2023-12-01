@@ -2,6 +2,7 @@ class SnippetsController < ApplicationController
   def index
     @snippet = Snippet.new
     @snippets = Snippet.all
+    @user = current_user
     # @snippets = Snippet.where(
     #   '(user_id = ?) OR (private = ?)',
     #   current_user.id, false

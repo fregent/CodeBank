@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :snippets
-  resources :directories
+  resources :directories do
+    member do
+      post 'add_snippet'
+    end
+  end
 
   devise_for :users
   root to: "pages#home"
