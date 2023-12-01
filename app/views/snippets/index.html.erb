@@ -6,7 +6,7 @@
   <% else %>
     <h2><%= @search_results.count %> results found:</h2>
   <% end %>
-  <div class="card-container">
+  <div class="card-container my-5">
     <% @search_results.each do |result| %>
       <% if result.searchable_type == 'Snippet' %>
         <%= render "shared/cards", snippet: result.searchable %>

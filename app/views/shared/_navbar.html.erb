@@ -27,10 +27,7 @@
 
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <%= link_to "Dashboard", snippets_path, class: "dropdown-item" %>
-            <%= link_to "My Favorites", "#", class: "dropdown-item" %>
-            <%= link_to "Popular", "#", class: "dropdown-item" %>
-            <%= link_to "My Groups", "#", class: "dropdown-item" %>
-            <%= link_to "My Settings", "#", class: "dropdown-item" %>
+            <%= link_to "My Directories", directories_path, class: "dropdown-item" %>
             <%= link_to "Log Out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
           </div>
 
