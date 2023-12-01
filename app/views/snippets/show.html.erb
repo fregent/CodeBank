@@ -1,4 +1,4 @@
-<%= link_to "<= Go back",  snippets_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
+<%= link_to "<= Go back",  snippets_path, class:"btn btn-primary rounded-pill btn-sm" %>
 
  <div class="buttons-action d-flex justify-content-end">
         <% if current_user == @snippet.user %>
@@ -27,7 +27,7 @@
             class="btn">
             <i class="fa-regular fa-clipboard fa-fade" style="color: #bababa;"></i>
           </button>
-            <textarea name="code-view" cols="30" rows="10" data-copy-to-clipboard-target="input"><%= simple_format(@snippet.content) %></textarea>
+            <textarea name="code-view" cols="30" rows="10" data-copy-to-clipboard-target="input"><%= @snippet.content %></textarea>
          </div>
 
 
