@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_01_111435) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_01_122545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_111435) do
     t.datetime "updated_at", null: false
     t.boolean "private", default: true
     t.integer "shared_count", default: 0
+    t.datetime "last_viewed"
     t.index ["user_id"], name: "index_directories_on_user_id"
   end
 
@@ -62,6 +63,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_111435) do
     t.integer "views", default: 0
     t.integer "comments_count", default: 0
     t.integer "shares_count", default: 0
+    t.datetime "last_viewed"
     t.index ["user_id"], name: "index_snippets_on_user_id"
   end
 

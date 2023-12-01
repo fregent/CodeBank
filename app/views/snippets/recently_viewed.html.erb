@@ -1,0 +1,4 @@
+<h5>My recents</h5>
+<% @snippets.map do |snippet| %>
+  <a href="/snippets/<%= snippet.id %>" class="text-black"><%= snippet.title %></a>
+<% end %>

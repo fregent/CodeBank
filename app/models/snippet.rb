@@ -7,4 +7,6 @@ class Snippet < ApplicationRecord
                     trigram: { threshold: 0.1 }
                   }
   has_and_belongs_to_many :directories
+  has_many :comments, dependent: :destroy
+  belongs_to :user
 end
