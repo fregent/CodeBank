@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  <h4 class="btn-book">Add a new code</h4>
+  <h4 class="btn-book">New Directory</h4>
 </button>
 <br>
 <br>
@@ -8,7 +8,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Adding your code as a new Snippet!</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Creating a new Directory!</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-backdrop="false"></button>
       </div>
       <div class="modal-body" style="
@@ -17,11 +17,9 @@
                     margin-top: 15px;
                     margin-bottom: 15px;">
 
-          <%= simple_form_for [@snippet] do |f| %>
+          <%= simple_form_for [@directory] do |f| %>
             <div>
-              <%= f.input :title, as: :string, label: 'Title:', placeholder: "Type your code's title here...", input_html: { style: 'border-color: black;' } %>
-              <%= f.input :content, as: :text, label: 'Your code:', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window' , id: 'your-textarea' } %>
-              <%= f.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code:', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
+              <%= f.input :name, as: :string, label: "Directory's name:", placeholder: "Type your Directory's name here...", input_html: { style: 'border-color: black;' } %>
               <%= f.input :private, as: :boolean, label: 'Make it private?', checked_value: 'positive', unchecked_value: 'negative', input_html: { style: 'border-color: black;' } %>
               <%= f.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
             </div>

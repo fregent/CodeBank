@@ -36,9 +36,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_122545) do
     t.index ["user_id"], name: "index_directories_on_user_id"
   end
 
-  create_table "directories_snippets", id: false, force: :cascade do |t|
-    t.bigint "snippet_id", null: false
+  create_table "directory_snippets", force: :cascade do |t|
     t.bigint "directory_id", null: false
+    t.bigint "snippet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["directory_id"], name: "index_directory_snippets_on_directory_id"
+    t.index ["snippet_id"], name: "index_directory_snippets_on_snippet_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -103,6 +107,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_122545) do
   add_foreign_key "comments", "snippets"
   add_foreign_key "comments", "users"
   add_foreign_key "directories", "users"
+  add_foreign_key "directory_snippets", "directories"
+  add_foreign_key "directory_snippets", "snippets"
   add_foreign_key "snippets", "users"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "users"

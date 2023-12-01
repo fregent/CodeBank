@@ -1,18 +1,59 @@
+<%= link_to "<= Go back",  directories_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
 <h2>Name of directory : <%= @directory.name %></h2>
+<% if @directory.private == true%>
+        <p class="snippet-status">Directory Status: Private</p>
+      <%else%>
+        <p>Directory Status: Public</p>
+      <%end%>
 
-<h3>Snippets :</h3>
-<ul>
-  <% @directory.snippets.each do |snippet| %>
-    <li>
-      <h4><%= snippet.title %></h4>
-      <p><%= snippet.content %></p>
-      <p>Langage : <%= snippet.language %></p>
-    </li>
-  <% end %>
-</ul>
+        <div class="buttons-action">
+            <% if current_user == @directory.user%>
+                <%= link_to directory_path(@directory), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce directory?" }, class: "btn btn-info btn-sup" do%>
+                <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
+              <% end %>
+            <% end %>
+              <% if current_user == @directory.user%>
+                  <%= link_to edit_directory_path(@directory), class: "btn btn-info edit-pen" do%>
+                  <i class="fa-solid fa-pencil fa-bounce"></i>
+                <% end %>
+              <% end %>
+         </div>
+
+<div class="show-container">
+    <div class="show-code">
 
 
-<%= link_to "Delete",
-  directory_path(@directory),
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
+   <div data-controller="toggle" class="mt-5">
+  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Add a snippet</button>
+      <div data-toggle-target="togglableElement" class="d-none">
+
+        <%= form_with(url: add_snippet_directory_path(@directory), method: :post, local: true) do |form| %>
+
+          <div class="field">
+            <%= form.label :snippet_id %>
+            <%= form.collection_select(:snippet_id, Snippet.all, :id, :title, prompt: "Choose a snippet") %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Add Snippet" %>
+          </div>
+          <% end %>
+
+        </div>
+      </div>
+  </div>
+
+
+              <% if @directory.snippets.any? %>
+  <h2>Snippets in this directory:</h2>
+  <ul>
+    <% @directory.snippets.each do |snippet| %>
+      <%= render "shared/cards", snippet: snippet %>
+      <!-- Ajoutez d'autres détails du snippet selon vos besoins -->
+    <% end %>
+  </ul>
+        <% else %>
+          <p>No snippets in this directory.</p>
+        <% end %>
+ </div>
+</div>
