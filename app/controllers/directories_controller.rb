@@ -2,6 +2,10 @@ class DirectoriesController < ApplicationController
 
   def index
     @directories = Directory.all
+    @directories = Directory.where(
+      '(user_id = ?) OR (private = ?)',
+      current_user.id, false
+    )
   end
 
   def show

@@ -11,10 +11,10 @@
       <% if result.searchable_type == 'Snippet' %>
         <%= render "shared/cards", snippet: result.searchable %>
       <% elsif result.searchable_type == 'Directory' %>
-        <!-- Ajoutez le rendu du contenu pour Directory si nécessaire -->
       <% end %>
     <% end %>
   </div>
+
 <% else %>
   <h3>All snippets</h3>
   <div class="card-container my-5">

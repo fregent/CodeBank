@@ -1,15 +1,15 @@
 class SnippetsController < ApplicationController
   def index
-    @snippets = Snippet.all
     @snippet = Snippet.new
-    # if params[:query].present?
-    #   @snippets = @snippets.where("title ILIKE ?", "%#{params[:query]}%")
-    # end
+    @snippets = Snippet.all
+    # @snippets = Snippet.where(
+    #   '(user_id = ?) OR (private = ?)',
+    #   current_user.id, false
+    # )
     if params[:query].present?
       @search_results = PgSearch.multisearch(params[:query])
-      # raise
     else
-      @snippets = Snippet.all
+      @snippets
     end
   end
 
