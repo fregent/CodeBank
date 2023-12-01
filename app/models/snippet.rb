@@ -8,4 +8,6 @@ class Snippet < ApplicationRecord
   belongs_to :user
   has_many :directory_snippets
   has_many :directories, through: :directory_snippets
+  has_many :comments, dependent: :destroy
+
 end

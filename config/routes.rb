@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+
+  get 'snippets/my_favorites', to: 'snippets#favorites', as: :my_favorites
+
   resources :snippets
   resources :directories do
     member do
       post 'add_snippet'
     end
   end
+
 
   devise_for :users
   root to: "pages#home"

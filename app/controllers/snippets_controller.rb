@@ -59,9 +59,52 @@ class SnippetsController < ApplicationController
     redirect_to snippets_path
   end
 
+  def share
+    @snippet = Snippet.find(params[:id])
+    @snippet.update(shared_count: @snippet.shared_count + 1)
+    redirect_to snippet_path
+  end
+
+  def unshare
+    @snippet = Snippet.find(params[:id])
+    @snippet.update(shared_count: @snippet.shared_count - 1)
+    redirect_to snippet_path
+  end
+
+  def like
+    @snippet = Snippet.find(params[:id])
+    @snippet.update(likes: @snippet.likes + 1)
+    redirect_to snippet_path
+  end
+
+  def unlike
+    @snippet = Snippet.find(params[:id])
+    @snippet.update(likes: @snippet.likes - 1)
+    redirect_to snippet_path
+  end
+
+  def comment
+    @snippet = Snippet.find(params[:id])
+    @snippet.update(comments_count: @snippet.comments_count + 1)
+    redirect_to snippet_path
+  end
+
+  def last_viewed
+    @snippet = Snippet.find(params[:id])
+    @snippet.update(last_viewed: Time.now)
+    redirect_to snippet_path
+  end
+
+  def recently_viewed
+    @snippets = Snippet.order(last_viewed: :desc).limit(3)
+  end
+
   private
 
   def snippet_params
-    params.require(:snippet).permit(:name, :content, :language, :private)
+    params.require(:snippet).permit(
+      :name, :content, :language, :private, :description,
+      :shared_count, :likes, :views, :comments_count
+    )
   end
 end
