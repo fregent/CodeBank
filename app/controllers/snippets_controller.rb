@@ -1,19 +1,19 @@
 class SnippetsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @snippet = Snippet.new
+    @snippets = Snippet.all
     @user = current_user
-    @public_snippets = Snippet.where(private: false)
-    @snippets_user = @user.snippets
-    @snippets = @public_snippets + @snippets_user
-    @snippets = Snippet.where(language: params[:language], private: false) if params[:language].present?
-
+    # @snippets = Snippet.where(
+    #   '(user_id = ?) OR (private = ?)',
+    #   current_user.id, false
+    # )
     if params[:query].present?
       @search_results = PgSearch.multisearch(params[:query])
     else
       @snippets
       @snippets = @snippets.where(language: params[:language]) if params[:language].present?
     end
-    @directories_user = @user.directories
   end
 
 def create_snippet_directory
