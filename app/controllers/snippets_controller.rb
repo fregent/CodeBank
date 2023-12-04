@@ -1,4 +1,5 @@
 class SnippetsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @snippet = Snippet.new
     @user = current_user

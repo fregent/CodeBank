@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= favicon_link_tag asset_path('favicon.ico') %>
   </head>
   <body>
-    <%= render "shared/navbar" %>
-
-    <div class="sidebar">
+    <div class="wrapper">
       <%= render "shared/sidebar" %>
-    </div>
-
-    <div class="container">
-      <div class="main-content">
-        <%= yield %>
-        <%= render "shared/flashes" %>
+      <div class="main">
+        <main class="content px-3 py-2">
+          <div class="container-fluid">
+            <%= render "shared/searchbar" %>
+            <%= yield %>
+            <%= render "shared/flashes" %>
+          </div>
+        </main>
       </div>
+    </div>
   </body>
 </html>

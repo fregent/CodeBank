@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_01_122545) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_01_123545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_122545) do
     t.integer "shared_count", default: 0
     t.datetime "last_viewed"
     t.index ["user_id"], name: "index_directories_on_user_id"
+  end
+
+  create_table "directories_snippets", id: false, force: :cascade do |t|
+    t.bigint "snippet_id", null: false
+    t.bigint "directory_id", null: false
   end
 
   create_table "directory_snippets", force: :cascade do |t|

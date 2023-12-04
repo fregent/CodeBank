@@ -1,4 +1,4 @@
-<%= render "shared/modal_snippet", snippets: @snippet %>
+<%= render "shared/modal_snippet", snippets: @snippet if user_signed_in? %>
 
 <%= form_tag(snippets_path, method: :get, class: 'form-inline') do %>
   <%= select_tag(:language, options_for_select(Snippet.pluck(:language).uniq, params[:language]), prompt: 'All language', class: 'form-control') %>
@@ -7,9 +7,9 @@
 
 <% if @search_results.present? %>
   <% if @search_results.count == 1 %>
-    <h2>1 result found</h2>
+    <h3>1 result found</h3>
   <% else %>
-    <h2><%= @search_results.count %> results found:</h2>
+    <h3><%= @search_results.count %> results found:</h3>
   <% end %>
   <div class="card-container my-5">
     <% @search_results.each do |result| %>
