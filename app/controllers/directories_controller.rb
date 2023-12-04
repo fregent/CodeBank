@@ -18,6 +18,7 @@ class DirectoriesController < ApplicationController
 
   end
 
+
   def add_snippet
     @directory = Directory.find(params[:id])
     @snippet = Snippet.find(params[:snippet_id])
@@ -30,9 +31,9 @@ class DirectoriesController < ApplicationController
     else
       flash[:alert] = 'This snippet already exists in this directory!'
     end
-
     redirect_to @directory
   end
+
 
   def create_snippet
     @directory = Directory.find(params[:id])
@@ -46,7 +47,6 @@ class DirectoriesController < ApplicationController
 
     redirect_to directory_path(@directory)
   end
-
 
   def show
     @directory = Directory.find(params[:id])

@@ -16,13 +16,25 @@ class SnippetsController < ApplicationController
     @directories_user = @user.directories
   end
 
+def create_snippet_directory
+    @directory = Directory.find(params[:id])
+    @snippet = @directory.snippets.build(snippet_params)
+
+    if @snippet.save
+      flash[:notice] = "Snippet created and added to the directory with success."
+    else
+      flash[:alert] = "Failed to create snippet."
+    end
+
+    redirect_to directory_path(@directory)
+  end
+
   def add_to_directory
     @snippet = Snippet.find(params[:id])
     @directories = current_user.directories
 
     # Assure-toi que tu as l'ID du répertoire sélectionné dans les paramètres
-    selected_directory_id = params[:selected_directory_id]
-
+    selected_directory_id = params[:directory_id]
     # Vérifie si le snippet n'est pas déjà dans le répertoire sélectionné
     if selected_directory_id && !Directory.find(selected_directory_id).snippets.include?(@snippet)
       # Ajoute le snippet au répertoire sélectionné
@@ -31,8 +43,7 @@ class SnippetsController < ApplicationController
     else
       flash[:alert] = 'This snippet already exists in the selected directory!'
     end
-
-    redirect_to directories_path
+    redirect_to directory_path(selected_directory_id)
   end
 
 

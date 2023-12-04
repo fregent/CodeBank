@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'snippets/my_favorites', to: 'snippets#favorites', as: :my_favorites
 
   resources :snippets do
@@ -8,22 +7,16 @@ Rails.application.routes.draw do
       post 'save_to_directory'
     end
   end
+
   resources :directories do
     member do
       post 'add_snippet'
+      post 'create_snippet', to: 'snippets#create_snippet_directory'
     end
   end
-
 
   devise_for :users
   root to: "pages#home"
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

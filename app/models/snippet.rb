@@ -10,4 +10,6 @@ class Snippet < ApplicationRecord
   has_many :directories, through: :directory_snippets
   has_many :comments, dependent: :destroy
 
+  accepts_nested_attributes_for :directory_snippets
+
 end

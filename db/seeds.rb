@@ -13,12 +13,14 @@ validation = gets.chomp
 if validation.include?("Y")
 
   puts "Cleaning database..."
-  User.destroy_all
+  # User.destroy_all
+  # Snippet.destroy_all
+  # Directory.destroy_all
   puts "Creating new users..."
 
-  # Create Users
+  Create Users
 
-  # Selma
+  Selma
   User.create!(
     first_name: "Salma",
     last_name: "Zakha",
@@ -63,26 +65,111 @@ if validation.include?("Y")
     admin: true
   )
 
-  # Snippet 1
-  50.times do
-    Directory.create!(
-      name: Faker::Lorem.word,
-      user_id: rand(1..4),
-      private: [true, false].sample
-    )
-  end
 
-  # Create 50 snippets
-  50.times do
-    Snippet.create!(
-      title: Faker::Lorem.words(number: 3).join(" "),
-      content: Faker::HTML.random,
-      private: [true, false].sample,
-      language: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"].sample,
-      user_id: rand(1..4),
-      description: Faker::Lorem.sentence
-    )
-  end
+
+directory1 = Directory.create!(name: "Ruby Examples", private: false)
+directory2 = Directory.create!(name: "JavaScript Snippets", private: true)
+directory3 = Directory.create!(name: "Python Code", private: false)
+directory4 = Directory.create!(name: "Life Code", private: false)
+directory5 = Directory.create!(name: "Going out Code", private: true)
+directory6 = Directory.create!(name: "Work Code", private: false)
+directory7 = Directory.create!(name: "Home Code", private: true)
+directory8 = Directory.create!(name: "Car Code", private: false)
+
+
+Snippet.create!(
+  title: "Ruby Snippet 1",
+  content: 'puts "Hello, Ruby!"\nputs "Welcome to the Ruby world"',
+  language: "Ruby",
+  private: [true, false].sample,
+  user_id: rand(1..4),
+  directory: directory1
+)
+
+Snippet.create!(
+  title: "Ruby Snippet 2",
+  content: 'def greet(name)\n  puts "Hello, #{name}!"\nend',
+  language: "Ruby",
+  private: [true, false].sample,
+  user_id: rand(1..3),
+  directory: directory1
+)
+
+# JavaScript Snippets
+Snippet.create!(
+  title: "JavaScript Snippet 1",
+  content: 'console.log("Hello, JavaScript!");\nconsole.log("Welcome to the JavaScript world");',
+  language: "JavaScript",
+  private: [true, false].sample,
+  user_id: rand(1..3),
+  directory: directory2
+)
+
+Snippet.create!(
+  title: "JavaScript Snippet 2",
+  content: 'function add(a, b) {\n  return a + b;\n}',
+  language: "JavaScript",
+  private: [true, false].sample,
+  user_id: rand(1..3),
+  directory: directory2
+)
+
+# Python Snippets
+Snippet.create!(
+  title: "Python Snippet 1",
+  content: 'print("Hello, Python!")\nprint("Welcome to the Python world")',
+  language: "Python",
+  private: [true, false].sample,
+  user_id: rand(1..3),
+  directory: directory3
+)
+
+Snippet.create!(
+  title: "Python Snippet 2",
+  content: 'def multiply(x, y):\n  return x * y',
+  language: "Python",
+  private: [true, false].sample,
+  user_id: rand(1..3),
+  directory: directory1
+)
+
+Snippet.create!(
+  title: "Ruby Snippet 1",
+  content: 'puts "Hello, Ruby!"\nputs "Welcome to the Ruby world"',
+  language: "Ruby",
+  private: [true, false].sample,
+  user_id: rand(1..3),
+  directory: directory8
+)
+
+Snippet.create!(
+  title: "Ruby Snippet 2",
+  content: 'def greet(name)\n  puts "Hello, #{name}!"\nend',
+  language: "Ruby",
+  private: [true, false].sample,
+  user_id: rand(1..3),
+  directory: directory6
+)
+
+# JavaScript Snippets
+Snippet.create!(
+  title: "JavaScript Snippet 1",
+  content: 'console.log("Hello, JavaScript!");\nconsole.log("Welcome to the JavaScript world");',
+  language: "JavaScript",
+  private: [true, false].sample,
+  user_id: rand(1..3),
+  directory: directory3
+)
+
+Snippet.create!(
+  title: "JavaScript Snippet 2",
+  content: 'function add(a, b) {\n  return a + b;\n}',
+  language: "JavaScript",
+  private: [true, false].sample,
+  user_id: rand(1..3),
+  directory: directory5
+  )
+
 
   puts "Finished!"
 else

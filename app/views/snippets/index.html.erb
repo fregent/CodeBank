@@ -1,3 +1,5 @@
+<%= link_to "<= All Directories",  directories_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
+<br>
 <%= render "shared/modal_snippet", snippets: @snippet %>
 
 <%= form_tag(snippets_path, method: :get, class: 'form-inline') do %>
