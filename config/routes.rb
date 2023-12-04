@@ -2,7 +2,12 @@ Rails.application.routes.draw do
 
   get 'snippets/my_favorites', to: 'snippets#favorites', as: :my_favorites
 
-  resources :snippets
+  resources :snippets do
+    member do
+      post 'add_to_directory'
+      post 'save_to_directory'
+    end
+  end
   resources :directories do
     member do
       post 'add_snippet'
