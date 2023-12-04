@@ -1,12 +1,20 @@
-<%= link_to snippet_path(snippet), class: "text-decoration-none" do %>
-  <div class="card m-3">
-    <span></span>
+<div class="card m-3">
+  <%= link_to snippet_path(snippet), class: "text-decoration-none" do %>
     <div class="content">
-      <h3 class="mb-3">
-        <%= snippet.title&.capitalize %>
-      </h3>
-      <p class="mb-3 content-snippet"><%= truncate(snippet.content, length: 20, omission: '...') %></p>
-      <p class="mb-3"><%= snippet.language %></p>
+      <div class="">
+        <h3 class="mb-3">
+          <%= snippet.title %>
+        </h3>
+      </div>
+      <h6 class="mb-3">
+        @<%= snippet.user.username %>
+      </h6>
+      <p class="mb-3 content-snippet"><% truncate(snippet.content, length: 20, omission: '...') %></p>
+      <div>
+        <p class="mb-3"><%= snippet.language %></p>
+      </div>
+
+      <p class="mb-3">Published date: <%= snippet.created_at.strftime("%d/%m/%Y") %></p>
 
       <div class="buttons-action d-flex justify-content-between">
         <% if current_user == snippet.user %>
@@ -22,5 +30,5 @@
         <% end %>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

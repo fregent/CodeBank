@@ -1,10 +1,10 @@
-<%= render "shared/modal_snippet", snippets: @snippet %>
+<%= render "shared/modal_snippet", snippets: @snippet if user_signed_in? %>
 
 <% if @search_results.present? %>
   <% if @search_results.count == 1 %>
-    <h2>1 result found</h2>
+    <h3>1 result found</h3>
   <% else %>
-    <h2><%= @search_results.count %> results found:</h2>
+    <h3><%= @search_results.count %> results found:</h3>
   <% end %>
   <div class="card-container my-5">
     <% @search_results.each do |result| %>
