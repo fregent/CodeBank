@@ -16,8 +16,8 @@
                     margin-bottom: 15px;">
 
         <%= simple_form_for [@directory] do |f| %>
-          <div>
-            <%= f.input :name, as: :string, label: "Directory's name:", placeholder: "Type your Directory's name here...", input_html: { style: 'border-color: black;' } %>
+          <div class="modal-text">
+            <%= f.input :name, as: :string, label: "Directory's name:", placeholder: "Type your directory's name here...", input_html: { style: 'border-color: black;' } %>
             <%= f.input :private, as: :boolean, label: 'Make it private?', checked_value: 'positive', unchecked_value: 'negative', input_html: { style: 'border-color: black;' } %>
             <%= f.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
           </div>

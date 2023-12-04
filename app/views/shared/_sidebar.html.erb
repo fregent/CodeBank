@@ -16,44 +16,45 @@
     <ul class="sidebar-nav">
 
       <li class="sidebar-header">
-        Dashboard
-      </li>
-
-      <li class="sidebar-item">
-        <%= link_to "<span><i class='fa-solid fa-code pe-3'></i>My Snippets</span>".html_safe, snippets_path, class: "sidebar-link" %>
-      </li>
-      <li class="sidebar-item">
-        <%= link_to "<span><i class='fa-solid fa-folder pe-3'></i>My Directories</span>".html_safe, directories_path, class: "sidebar-link" %>
-      </li>
-      <li class="sidebar-item">
-        <%= link_to "<span><i class='fa-solid fa-people-group pe-3'></i>My Teams</span>".html_safe, snippets_path, class: "sidebar-link" %>
-      </li>
-
-      <li class="sidebar-header">
         Community
       </li>
 
       <li class="sidebar-item">
         <%= link_to "<span><i class='fa-solid fa-eye pe-3'></i>Discover</span>".html_safe, snippets_path, class: "sidebar-link" %>
       </li>
-      <li class="sidebar-item">
-        <%= link_to "<span><i class='fa-solid fa-bookmark pe-3'></i>Saved</span>".html_safe, snippets_path, class: "sidebar-link" %>
-      </li>
 
       <% if user_signed_in? %>
+
+        <li class="sidebar-item">
+          <%= link_to "<span><i class='fa-solid fa-heart pe-3'></i>My Favorites</span>".html_safe, snippets_path, class: "sidebar-link" %>
+        </li>
+
+        <li class="sidebar-header">
+          Dashboard
+        </li>
+
+        <li class="sidebar-item">
+          <%= link_to "<span><i class='fa-solid fa-code pe-3'></i>My Snippets</span>".html_safe, snippets_path, class: "sidebar-link" %>
+        </li>
+        <li class="sidebar-item">
+          <%= link_to "<span><i class='fa-solid fa-folder pe-3'></i>My Directories</span>".html_safe, directories_path, class: "sidebar-link" %>
+        </li>
+        <%# <li class="sidebar-item"> %>
+          <% link_to "<span><i class='fa-solid fa-people-group pe-3'></i>My Teams</span>".html_safe, snippets_path, class: "sidebar-link" %>
+        <%# </li> %>
 
         <li class="sidebar-header">
           Settings
         </li>
 
-        <li class="sidebar-item">
-          <%= link_to "<span><i class='fa-solid fa-gear pe-3'></i>My Preferences</span>".html_safe, snippets_path, class: "sidebar-link" %>
-        </li>
+        <%# <li class="sidebar-item"> %>
+          <% link_to "<span><i class='fa-solid fa-gear pe-3'></i>My Preferences</span>".html_safe, snippets_path, class: "sidebar-link" %>
+        <%# </li> %>
         <li class="sidebar-item">
           <%= link_to "<span><i class='fa-solid fa-user pe-3'></i>My Account</span>".html_safe, snippets_path, class: "sidebar-link" %>
         </li>
         <li class="sidebar-item">
-          <%= link_to "<span><i class='fa-solid fa-right-from-bracket pe-3'></i>Log Out</span>".html_safe, destroy_user_session_path, class: "sidebar-link" %>
+          <%= link_to "<span><i class='fa-solid fa-right-from-bracket pe-3'></i>Log Out</span>".html_safe, destroy_user_session_path, data: {turbo_method: :delete}, class: "sidebar-link" %>
         </li>
 
       <% else %>

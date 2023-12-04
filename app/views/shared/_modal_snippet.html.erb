@@ -6,7 +6,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Adding your code as a new Snippet!</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Adding your code as a new snippet!</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-backdrop="false"></button>
       </div>
       <div class="modal-body" style="
@@ -16,16 +16,14 @@
                   margin-bottom: 15px;">
 
         <%= simple_form_for [@snippet] do |f| %>
-          <div>
+          <div class="modal-text">
             <%= f.input :title, as: :string, label: 'Title:', placeholder: "Type your code's title here...", input_html: { style: 'border-color: black;' } %>
             <%= f.input :content, as: :text, label: 'Your code:', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window' , id: 'your-textarea' } %>
             <%= f.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code:', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
-            <%= f.input :private, as: :boolean, label: 'Make it private?', checked_value: 'positive', unchecked_value: 'negative', input_html: { style: 'border-color: black;' } %>
+            <%= f.input :private, as: :boolean, label: 'Make it private?', checked_value: 'true', unchecked_value: 'false', input_html: { style: 'border-color: black;' } %>
             <%= f.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
           </div>
         <% end %>
-
-
 
       </div>
     </div>
