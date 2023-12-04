@@ -155,22 +155,21 @@ a {
 
 textarea {
   font-size: 16px;
-  width: 600px;
+  width: 80%;
   height: 450px;
-  background-color: rgb(25, 25, 25);
+  background-color: #00000F;
   color: white;
   border: transparent;
 }
 
 .code-bar {
-width: 600px;
-border: solid;
-border-top-right-radius: 5px;
-border-top-left-radius: 5px;
-background-color: rgb(70, 70, 70);
-display: flex;
-justify-content: space-between;
-
+  width: 80%;
+  border: solid;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  background-color: #0f0f12;
+  display: flex;
+  justify-content: space-between;
 }
 
 .show-container {
@@ -187,7 +186,7 @@ margin-left: 10px
 }
 
 .code-title {
-text-decoration: underline;
+// text-decoration: underline;
 margin-bottom: 28px;
 }
 

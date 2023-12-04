@@ -9,7 +9,7 @@
   <div class="card-container my-5">
     <% @search_results.each do |result| %>
       <% if result.searchable_type == 'Snippet' %>
-        <%= render "shared/cards", snippet: result.searchable %>
+        <%= render "shared/snippet_cards", snippet: result.searchable %>
       <% elsif result.searchable_type == 'Directory' %>
       <% end %>
     <% end %>
@@ -20,7 +20,7 @@
   <h2 class="mt-5">All snippets</h2>
   <div class="card-container my-5">
     <% @snippets.each do |snippet| %>
-      <%= render "shared/cards", snippet: snippet %>
+      <%= render "shared/snippet_cards", snippet: snippet %>
     <% end %>
   </div>
 <% end %>
