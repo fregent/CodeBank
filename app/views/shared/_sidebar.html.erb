@@ -51,7 +51,7 @@
           <% link_to "<span><i class='fa-solid fa-gear pe-3'></i>My Preferences</span>".html_safe, snippets_path, class: "sidebar-link" %>
         <%# </li> %>
         <li class="sidebar-item">
-          <%= link_to "<span><i class='fa-solid fa-user pe-3'></i>My Account</span>".html_safe, snippets_path, class: "sidebar-link" %>
+          <%= link_to "<span><i class='fa-solid fa-user pe-3'></i>My Account</span>".html_safe, edit_user_registration_path, class: "sidebar-link" %>
         </li>
         <li class="sidebar-item">
           <%= link_to "<span><i class='fa-solid fa-right-from-bracket pe-3'></i>Log Out</span>".html_safe, destroy_user_session_path, data: {turbo_method: :delete}, class: "sidebar-link" %>
