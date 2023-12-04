@@ -6,26 +6,25 @@
           <%= snippet.title %>
         </h3>
       </div>
-      <h6 class="mb-3">
-        @<%= snippet.user.username %>
-      </h6>
+      <div>
+        <h6 class="mb-3">
+          @<%= snippet.user.username %>
+        </h6>
+      </div>
       <p class="mb-3 content-snippet"><% truncate(snippet.content, length: 20, omission: '...') %></p>
       <div>
         <p class="mb-3"><%= snippet.language %></p>
       </div>
 
-      <p class="mb-3">Published date: <%= snippet.created_at.strftime("%d/%m/%Y") %></p>
+      <p class="mb-3"><% snippet.created_at.strftime("%d/%m/%Y") %></p>
 
       <div class="buttons-action d-flex justify-content-between">
         <% if current_user == snippet.user %>
-          <%= link_to snippet_path(snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
-            <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
-          <% end %>
-        <% end %>
-
-        <% if current_user == snippet.user %>
           <%= link_to edit_snippet_path(snippet), class: "btn btn-info edit-pen" do %>
             <i class="fa-solid fa-pencil fa-bounce"></i>
+          <% end %>
+          <%= link_to snippet_path(snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
+            <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
           <% end %>
         <% end %>
       </div>

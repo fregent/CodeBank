@@ -104,7 +104,7 @@ class SnippetsController < ApplicationController
 
   def snippet_params
     params.require(:snippet).permit(
-      :name, :content, :language, :private, :description,
+      :title, :content, :language, :private, :description,
       :shared_count, :likes, :views, :comments_count
     )
   end
