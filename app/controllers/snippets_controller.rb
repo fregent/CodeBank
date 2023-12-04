@@ -102,17 +102,17 @@ class SnippetsController < ApplicationController
     redirect_to snippet_path
   end
 
-  def like
-    @snippet = Snippet.find(params[:id])
-    @snippet.update(likes: @snippet.likes + 1)
-    redirect_to snippet_path
-  end
+  # def like
+  #   @snippet = Snippet.find(params[:id])
+  #   @snippet.update(likes: @snippet.likes + 1)
+  #   redirect_to snippet_path
+  # end
 
-  def unlike
-    @snippet = Snippet.find(params[:id])
-    @snippet.update(likes: @snippet.likes - 1)
-    redirect_to snippet_path
-  end
+  # def unlike
+  #   @snippet = Snippet.find(params[:id])
+  #   @snippet.update(likes: @snippet.likes - 1)
+  #   redirect_to snippet_path
+  # end
 
   def comment
     @snippet = Snippet.find(params[:id])
@@ -138,4 +138,17 @@ class SnippetsController < ApplicationController
       :shared_count, :likes, :views, :comments_count
     )
   end
-end
+
+  # def like
+  #   @snippet = Snippet.find(params[:id])
+  #   if current_user.snippets.exclude?(@snippet)
+  #       current_user.snippets << @snippet
+  #      flash[:success] = "Post added to favorites!"
+  #    else
+  #      flash[:notice] = "Post already in favorites!"
+  #     end
+  #     redirect_to @snippet
+  #   end
+
+
+ end

@@ -36,8 +36,12 @@
       <li class="sidebar-item">
         <%= link_to "<span><i class='fa-solid fa-eye pe-3'></i>Discover</span>".html_safe, snippets_path, class: "sidebar-link" %>
       </li>
-      <li class="sidebar-item">
+      <%# <li class="sidebar-item">
         <%= link_to "<span><i class='fa-solid fa-bookmark pe-3'></i>Saved</span>".html_safe, snippets_path, class: "sidebar-link" %>
+      <%# </li> %>
+
+        <li class="sidebar-item">
+        <%= link_to "<span><i class='fas fa-heart'></i> My favorites</span>".html_safe, likes_index_path, class: "sidebar-link" %>
       </li>
 
       <% if user_signed_in? %>

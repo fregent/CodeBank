@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_01_123545) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_04_132043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_123545) do
     t.datetime "updated_at", null: false
     t.index ["directory_id"], name: "index_directory_snippets_on_directory_id"
     t.index ["snippet_id"], name: "index_directory_snippets_on_snippet_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.boolean "like"
+    t.bigint "user_id", null: false
+    t.bigint "snippet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["snippet_id"], name: "index_likes_on_snippet_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -114,6 +124,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_123545) do
   add_foreign_key "directories", "users"
   add_foreign_key "directory_snippets", "directories"
   add_foreign_key "directory_snippets", "snippets"
+  add_foreign_key "likes", "snippets"
+  add_foreign_key "likes", "users"
   add_foreign_key "snippets", "users"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "users"
