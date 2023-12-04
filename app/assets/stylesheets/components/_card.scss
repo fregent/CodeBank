@@ -7,12 +7,13 @@
   transition: 0.5s;
   cursor: pointer;
   border: transparent;
-  background-color: transparent;
+  // background: linear-gradient(13deg, $cb_blue, #000000);
+  // border-radius: 1.2em;
 }
 
-// .card:hover {
-//   transform: translateY(-20px);
-// }
+.card:hover {
+  transform: translateY(-20px);
+}
 
 .card::before {
   content: '';
@@ -21,7 +22,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(45deg, #7510d4, #000000);
+  background: linear-gradient(13deg, $cb_blue, #000000);
   border-radius: 1.2em;
 }
 
@@ -93,9 +94,10 @@ text-align: center;
 }
 
 .card-container {
-  max-width: 1200px;
+  // max-width: 1200px;
   // margin-left: 150px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 5px;
   // justify-content: space-between;

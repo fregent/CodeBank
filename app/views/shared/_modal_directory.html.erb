@@ -1,8 +1,6 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  <h4 class="btn-book">New Directory</h4>
+  New Directory
 </button>
-<br>
-<br>
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -17,13 +15,13 @@
                     margin-top: 15px;
                     margin-bottom: 15px;">
 
-          <%= simple_form_for [@directory] do |f| %>
-            <div>
-              <%= f.input :name, as: :string, label: "Directory's name:", placeholder: "Type your Directory's name here...", input_html: { style: 'border-color: black;' } %>
-              <%= f.input :private, as: :boolean, label: 'Make it private?', checked_value: 'positive', unchecked_value: 'negative', input_html: { style: 'border-color: black;' } %>
-              <%= f.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
-            </div>
-          <% end %>
+        <%= simple_form_for [@directory] do |f| %>
+          <div>
+            <%= f.input :name, as: :string, label: "Directory's name:", placeholder: "Type your Directory's name here...", input_html: { style: 'border-color: black;' } %>
+            <%= f.input :private, as: :boolean, label: 'Make it private?', checked_value: 'positive', unchecked_value: 'negative', input_html: { style: 'border-color: black;' } %>
+            <%= f.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
+          </div>
+        <% end %>
 
       </div>
     </div>
