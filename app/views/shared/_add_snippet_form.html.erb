@@ -1,0 +1,34 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <h4 class="btn-book">Add an existing Snippet to this directory</h4>
+</button>
+<br>
+<br>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Adding a Snippet!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-backdrop="false"></button>
+      </div>
+      <div class="modal-body" style="
+                    padding-right: 50px;
+                    padding-left: 50px;
+                    margin-top: 15px;
+                    margin-bottom: 15px;">
+
+        <%= form_with(url: add_snippet_directory_path(@directory), method: :post, local: true) do |form| %>
+          <div class="field">
+            <%= form.label :snippet_id %>
+            <%= form.collection_select(:snippet_id, Snippet.all.where(private: false), :id, :title, prompt: "Choose a snippet", class: "snippet-select") %>
+          </div>
+          <div class="actions">
+            <%= form.submit "Add Snippet" %>
+          </div>
+        <% end %>
+
+
+      </div>
+    </div>
+  </div>
+</div>

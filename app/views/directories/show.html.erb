@@ -22,22 +22,22 @@
 <div class="show-container">
     <div class="show-code">
 
+        <%=render "shared/add_snippet_form"%>
 
    <div data-controller="toggle" class="mt-5">
-  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Add a snippet</button>
+  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Create a new Snippet in this Directory</button>
       <div data-toggle-target="togglableElement" class="d-none">
 
-        <%= form_with(url: add_snippet_directory_path(@directory), method: :post, local: true) do |form| %>
+        <%= simple_form_for [@directory, @new_snippet], url: { action: :create }, local: true do |form| %>
+        <%= form.input :directory_id, as: :hidden, input_html: { value: @directory.id } %>
+        <%= form.input :title, label: 'Title:', placeholder: "Type your code's title here...", input_html: { style: 'border-color: black;' } %>
+        <%= form.input :content, label: 'Your code:', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window', id: 'your-textarea' } %>
+        <%= form.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code:', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
+        <%= form.input :private, as: :boolean, label: 'Make it private?', checked_value: 'positive', unchecked_value: 'negative', input_html: { style: 'border-color: black;' } %>
+        <%= form.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
+      <% end %>
 
-          <div class="field">
-            <%= form.label :snippet_id %>
-            <%= form.collection_select(:snippet_id, Snippet.all, :id, :title, prompt: "Choose a snippet") %>
-          </div>
 
-          <div class="actions">
-            <%= form.submit "Add Snippet" %>
-          </div>
-          <% end %>
 
         </div>
       </div>

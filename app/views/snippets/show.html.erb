@@ -1,5 +1,63 @@
 <%= link_to "Go Back",  snippets_path, class:"btn btn-primary rounded-pill btn-sm" %>
 
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <h4 class="btn-book">Add this snippet to a directory</h4>
+</button>
+<br>
+<br>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Which directory to you want to add this snippet?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-backdrop="false"></button>
+      </div>
+      <div class="modal-body" style="
+                    padding-right: 50px;
+                    padding-left: 50px;
+                    margin-top: 15px;
+                    margin-bottom: 15px;">
+
+         <!-- app/views/directories/show.html.erb -->
+
+        <%= form_with(url: add_to_directory_snippet_path(@snippet), method: :post, local: true) do |form| %>
+          <div class="field">
+            <%= form.label :directory_id %>
+            <%= form.collection_select(:directory_id, current_user.directories, :id, :name, prompt: "Choose a directory", class: "directory-select") %>
+          </div>
+          <div class="actions">
+            <%= form.submit "Add to directory" %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  <div class="buttons-action d-flex justify-content-end">
         <% if current_user == @snippet.user %>
           <%= link_to snippet_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
@@ -14,22 +72,25 @@
         <% end %>
       </div>
 
-<div class="show-container">
+<div class="show-container" data-controller="copy-to-clipboard">
    <h2 class="code-title"><%= @snippet.title&.capitalize %></h2>
-    <div class="show-code">
 
-      <div class="code-bar"  data-controller="copy-to-clipboard">
+
+      <div class="code-bar"  >
+
         <h6><%= @snippet.language%></h6>
+
             <button
             data-action="click->copy-to-clipboard#copy"
-            data-copy-to-clipboard-target="action"
-            data-copy-to-clipboard-button-text-value="Copied!"
+            
             class="btn">
-            <i class="fa-regular fa-clipboard fa-fade" style="color: #bababa;"></i>
+            <i data-copy-to-clipboard-target="action" class="fa-regular fa-clipboard fa-fade" style="color: #bababa;"></i>
+            <i data-copy-to-clipboard-target="checked" class="fa-solid fa-clipboard-check fa-fade d-none" style="color: #bababa;"></i>
           </button>
-            <textarea name="code-view" cols="30" rows="10" data-copy-to-clipboard-target="input"><%= @snippet.content %></textarea>
+
          </div>
 
+            <textarea name="code-view" cols="30" rows="10" data-copy-to-clipboard-target="input"><%= simple_format(@snippet.content) %></textarea>
 
 
 
@@ -38,6 +99,5 @@
       <% else %>
         <p>Snippet Status: Public</p>
       <% end %>
-    </div>
   </div>
 </div>

@@ -1,24 +1,28 @@
 class DirectoriesController < ApplicationController
 
   def index
-    @directories = Directory.all
     @directory = Directory.new
-
     @user = current_user
-    # @snippets = Snippet.where(
-    #   '(user_id = ?) OR (private = ?)',
-    #   current_user.id, false
-    # )
+    @public_directories = Directory.where(private: false)
+    @directories_user = @user.directories
+    @directories = @public_directories + @directories_user
+    snippet_id = params[:snippet_id]
+    @selected_snippet = Snippet.find_by(id: snippet_id)
+    @search_results = PgSearch.multisearch(params[:query])
+
     if params[:query].present?
       @search_results = PgSearch.multisearch(params[:query])
     else
       @directories
     end
+
   end
 
   def add_snippet
     @directory = Directory.find(params[:id])
     @snippet = Snippet.find(params[:snippet_id])
+    snippet_id = params[:snippet_id]
+    @selected_snippet = Snippet.find_by(id: snippet_id)
 
     unless @directory.snippets.include?(@snippet)
       @directory.snippets << @snippet
@@ -30,11 +34,25 @@ class DirectoriesController < ApplicationController
     redirect_to @directory
   end
 
-  def show
+  def create_snippet
     @directory = Directory.find(params[:id])
-    @snippet = Snippet.find(params[:id])
+    @new_snippet = @directory.snippets.build(snippet_params)
+
+    if @new_snippet.save
+      flash[:notice] = "Snippet created successfully."
+    else
+      flash[:alert] = "Failed to create snippet."
+    end
+
+    redirect_to directory_path(@directory)
   end
 
+
+  def show
+    @directory = Directory.find(params[:id])
+    @snippets = @directory.snippets
+    @new_snippet = Snippet.new
+  end
 
   def new
     @directory = Directory.new
