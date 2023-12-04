@@ -1,5 +1,10 @@
 <%= render "shared/modal_snippet", snippets: @snippet %>
 
+<%= form_tag(snippets_path, method: :get, class: 'form-inline') do %>
+  <%= select_tag(:language, options_for_select(Snippet.pluck(:language).uniq, params[:language]), prompt: 'All language', class: 'form-control') %>
+  <%= submit_tag('Filter', class: 'btn btn-primary') %>
+<% end %>
+
 <% if @search_results.present? %>
   <% if @search_results.count == 1 %>
     <h2>1 result found</h2>
