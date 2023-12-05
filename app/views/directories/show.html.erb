@@ -1,59 +1,53 @@
-<%= link_to "<= Go back",  directories_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
-<h2>Name of directory : <%= @directory.name %></h2>
+<%= link_to "Go Back",  directories_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
+<h2><%= @directory.name %></h2>
 <% if @directory.private == true%>
-        <p class="snippet-status">Directory Status: Private</p>
-      <%else%>
-        <p>Directory Status: Public</p>
-      <%end%>
+  <p class="snippet-status">Directory Status: Private</p>
+<% else %>
+  <p>Directory Status: Public</p>
+<% end %>
 
-        <div class="buttons-action">
-            <% if current_user == @directory.user%>
-                <%= link_to directory_path(@directory), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce directory?" }, class: "btn btn-info btn-sup" do%>
-                <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
-              <% end %>
-            <% end %>
-              <% if current_user == @directory.user%>
-                  <%= link_to edit_directory_path(@directory), class: "btn btn-info edit-pen" do%>
-                  <i class="fa-solid fa-pencil fa-bounce"></i>
-                <% end %>
-              <% end %>
-         </div>
+<div class="buttons-action">
+  <% if current_user == @directory.user%>
+      <%= link_to directory_path(@directory), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce directory?" }, class: "btn btn-info btn-sup" do%>
+      <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
+    <% end %>
+  <% end %>
+  <% if current_user == @directory.user%>
+      <%= link_to edit_directory_path(@directory), class: "btn btn-info edit-pen" do%>
+      <i class="fa-solid fa-pencil fa-bounce"></i>
+    <% end %>
+  <% end %>
+</div>
 
 <div class="show-container">
-    <div class="show-code">
+  <div class="show-code">
+    <%=render "shared/add_snippet_form"%>
 
-        <%=render "shared/add_snippet_form"%>
-
-   <div data-controller="toggle" class="mt-5">
-  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Create a new Snippet in this Directory</button>
+    <div data-controller="toggle" class="mt-5">
+      <button data-action="click->toggle#fire" class="btn btn-outline-primary">Create a new Snippet in this Directory</button>
       <div data-toggle-target="togglableElement" class="d-none">
 
         <%= simple_form_for [@directory, @new_snippet], url: { action: :create }, local: true do |form| %>
-        <%= form.input :directory_id, as: :hidden, input_html: { value: @directory.id } %>
-        <%= form.input :title, label: 'Title:', placeholder: "Type your code's title here...", input_html: { style: 'border-color: black;' } %>
-        <%= form.input :content, label: 'Your code:', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window', id: 'your-textarea' } %>
-        <%= form.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code:', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
-        <%= form.input :private, as: :boolean, label: 'Make it private?', checked_value: 'positive', unchecked_value: 'negative', input_html: { style: 'border-color: black;' } %>
-        <%= form.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
-      <% end %>
-
-
-
-        </div>
+          <%= form.input :directory_id, as: :hidden, input_html: { value: @directory.id } %>
+          <%= form.input :title, label: 'Title:', placeholder: "Type your code's title here...", input_html: { style: 'border-color: black;' } %>
+          <%= form.input :content, label: 'Your code:', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window', id: 'your-textarea' } %>
+          <%= form.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code:', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
+          <%= form.input :private, as: :boolean, label: 'Make it private?', checked_value: 'positive', unchecked_value: 'negative', input_html: { style: 'border-color: black;' } %>
+          <%= form.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
+        <% end %>
       </div>
+    </div>
   </div>
 
-
-              <% if @directory.snippets.any? %>
-  <h2>Snippets in this directory:</h2>
-  <ul>
-    <% @directory.snippets.each do |snippet| %>
-      <%= render "shared/cards", snippet: snippet %>
-      <!-- Ajoutez d'autres détails du snippet selon vos besoins -->
-    <% end %>
-  </ul>
-        <% else %>
-          <p>No snippets in this directory.</p>
-        <% end %>
- </div>
+  <% if @directory.snippets.any? %>
+    <h2>Snippets in this directory:</h2>
+    <ul>
+      <% @directory.snippets.each do |snippet| %>
+        <%= render "shared/snippet_cards", snippet: snippet %>
+        <!-- Ajoutez d'autres détails du snippet selon vos besoins -->
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No snippets in this directory.</p>
+  <% end %>
 </div>

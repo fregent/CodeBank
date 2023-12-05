@@ -1,30 +1,26 @@
 <%= render "shared/modal_snippet", snippets: @snippet if user_signed_in? %>
 
-<%= form_tag(snippets_path, method: :get, class: 'form-inline') do %>
-  <%= select_tag(:language, options_for_select(Snippet.pluck(:language).uniq, params[:language]), prompt: 'All language', class: 'form-control') %>
-  <%= submit_tag('Filter', class: 'btn btn-primary') %>
-<% end %>
-
 <% if @search_results.present? %>
   <% if @search_results.count == 1 %>
-    <h3>1 result found</h3>
+    <h2>1 result found</h2>
   <% else %>
-    <h3><%= @search_results.count %> results found:</h3>
+    <h2><%= @search_results.count %> results found</h2>
   <% end %>
   <div class="card-container my-5">
     <% @search_results.each do |result| %>
       <% if result.searchable_type == 'Snippet' %>
-        <%= render "shared/cards", snippet: result.searchable %>
+        <%= render "shared/snippet_cards", snippet: result.searchable %>
       <% elsif result.searchable_type == 'Directory' %>
       <% end %>
     <% end %>
   </div>
 
 <% else %>
-  <h3>All snippets</h3>
+  <%= render "shared/filter-form" %>
+  <h2 class="mt-5">All snippets</h2>
   <div class="card-container my-5">
     <% @snippets.each do |snippet| %>
-      <%= render "shared/cards", snippet: snippet %>
+      <%= render "shared/snippet_cards", snippet: snippet %>
     <% end %>
   </div>
 <% end %>

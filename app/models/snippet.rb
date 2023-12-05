@@ -10,5 +10,5 @@ class Snippet < ApplicationRecord
   has_many :directories, through: :directory_snippets
   has_many :comments, dependent: :destroy
   has_many :likes
-  validates :title, presence: true
+  validates :title, :content, :language, presence: true
 end

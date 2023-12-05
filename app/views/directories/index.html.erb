@@ -1,4 +1,4 @@
-<h1>Directories</h1>
+<h2 class="my-5">Directories</h2>
 
 <%= render "shared/modal_directory", directories: @directory %>
 
@@ -8,10 +8,10 @@
   <% else %>
     <h2><%= @search_results.count %> results found:</h2>
   <% end %>
-  <div class="card-container">
+  <div class="card-container my-5">
     <% @search_results.each do |result| %>
       <% if result.searchable_type == 'Snippet' %>
-        <%= render "shared/cards", snippet: result.searchable %>
+        <%= render "shared/snippet_cards", snippet: result.searchable %>
       <% elsif result.searchable_type == 'Directory' %>
         <%= render "shared/directory_cards", directory: result.searchable %>
       <% end %>
@@ -19,7 +19,7 @@
   </div>
 
 <% else %>
-  <div class="card-container">
+  <div class="card-container my-5">
     <% @directories.each do |directory| %>
       <%= render "shared/directory_cards", directory: directory %>
     <% end %>
