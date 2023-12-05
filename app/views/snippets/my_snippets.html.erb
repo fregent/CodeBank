@@ -21,7 +21,9 @@
 
 <% else %>
   <%= render "shared/filter-form" %>
-  <h2 class="mt-5">All snippets</h2>
+<h2 class="mt-5">
+  <%= @snippets.count == 1 ? "You have #{@snippets.count} snippet" : "You have #{@snippets.count} snippets" %>
+</h2>
   <div class="card-container my-5">
     <% @snippets.each do |snippet| %>
       <%= render "shared/cards", snippet: snippet %>

@@ -18,9 +18,9 @@ if validation.include?("Y")
   # Directory.destroy_all
   puts "Creating new users..."
 
-  Create Users
 
-  Selma
+
+
   User.create!(
     first_name: "Salma",
     last_name: "Zakha",

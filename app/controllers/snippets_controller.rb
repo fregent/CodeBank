@@ -2,7 +2,7 @@ class SnippetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @snippet = Snippet.new
-    @snippets = Snippet.all
+    @snippets = Snippet.all.where(private: false)
     @user = current_user
     # @snippets = Snippet.where(
     #   '(user_id = ?) OR (private = ?)',
@@ -14,6 +14,23 @@ class SnippetsController < ApplicationController
       @snippets
       @snippets = @snippets.where(language: params[:language]) if params[:language].present?
     end
+  end
+
+  def my_snippets
+    @snippet = Snippet.new
+    @user = current_user
+    @snippets = @user.snippets
+    # @snippets = Snippet.where(
+    #   '(user_id = ?) OR (private = ?)',
+    #   current_user.id, false
+    # )
+    if params[:query].present?
+      @search_results = PgSearch.multisearch(params[:query])
+    else
+      @snippets
+      @snippets = @snippets.where(language: params[:language]) if params[:language].present?
+    end
+
   end
 
 def create_snippet_directory
@@ -98,6 +115,22 @@ def create_snippet_directory
       @snippet.destroy
     end
     redirect_to snippets_path
+  end
+
+  def remove_snippet
+    @directory = Directory.find(params[:id])
+    @snippet = Snippet.find(params[:snippet_id])
+
+    @directories_snippet = DirectoriesSnippet.find_by(directory_id: @directory.id, snippet_id: @snippet.id)
+
+    if @directories_snippet
+      @directories_snippet.destroy
+      flash[:notice] = 'Snippet removed from the directory with success!'
+    else
+      flash[:alert] = 'This snippet does not exist in this directory!'
+    end
+
+    redirect_to directory_path(@directory)
   end
 
   def share
