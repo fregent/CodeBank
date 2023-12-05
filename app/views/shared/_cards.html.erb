@@ -1,21 +1,26 @@
-<div class="card m-3">
+<div class="container card m-3">
   <%= link_to snippet_path(snippet), class: "text-decoration-none" do %>
-    <div class="content">
-      <div class="">
-        <h3 class="mb-3">
-          <%= snippet.title %>
-        </h3>
-      </div>
+
+  <header>
+    <h3 class="mb-3">
+      <%= snippet.title %>
+     </h3>
+   </header>
+
+      <main>
+
       <h6 class="mb-3">
         @<%= snippet.user.username %>
       </h6>
-      <p class="mb-3 content-snippet"><% truncate(snippet.content, length: 20, omission: '...') %></p>
+       <p class="mb-3 content-snippet"><% truncate(snippet.content, length: 20, omission: '...') %></p>
       <div>
         <p class="mb-3"><%= snippet.language %></p>
       </div>
+       <p class="mb-3">Published date: <%= snippet.created_at.strftime("%d/%m/%Y") %></p>
 
-      <p class="mb-3">Published date: <%= snippet.created_at.strftime("%d/%m/%Y") %></p>
+      </main>
 
+    <footer>
       <div class="buttons-action d-flex justify-content-between">
         <% if current_user == snippet.user %>
           <%= link_to snippet_path(snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
@@ -30,19 +35,20 @@
         <% end %>
       </div>
 
-<%= link_to snippet_new_like_path(snippet), data: { 'turbo-method' => :post } do %>
-  <button type="submit" class="like-button" data-controller="like" data-action="click->like#like">
-    <% if Like.where(user: @current_user, snippet: snippet).count == 0 %>
-     <i class="far fa-heart" data-target="like.heart"></i>
-     
-    <% else %>
-      <i class="fas fa-heart"></i>
+   <div>
+    <%= link_to snippet_new_like_path(snippet), data: { 'turbo-method' => :post } do %>
+        <% if Like.where(user: @current_user, snippet: snippet).count == 0 %>
+            <i data-controller="like" data-action="click->like#like" class="far fa-heart" data-like-target="heart"></i>
+          <% else %>
+            <i data-controller="like" data-action="click->like#like" class="fas fa-heart" data-like-target="heart"></i>
 
-    <% end %>
-    <%# <span class="like-count"><%= @post.likes.count %>
-  </button>
-  <% end %>
+        <% end %>
+      <% end %>
 
-    </div>
+  </div>
   <% end %>
+   </footer>
 </div>
+
+
+

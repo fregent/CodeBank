@@ -5,7 +5,7 @@
 
       <div class="buttons-action d-flex justify-content-between">
         <% if current_user == like.user %>
-          <%= link_to likes_index_path(like), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
+          <%= link_to like_path(like), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
             <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
           <% end %>
         <% end %>

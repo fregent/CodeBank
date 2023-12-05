@@ -17,7 +17,7 @@ export default class extends Controller {
   //   }
   // }
 
-  if (this.isLiked) {
+  if (this.heartTarget.classList.contains('fas')) {
     this.heartTarget.classList.remove("fas");
     this.heartTarget.classList.add("far");
     // Ajoutez ici la logique pour supprimer le like côté serveur si nécessaire
@@ -26,7 +26,6 @@ export default class extends Controller {
     this.heartTarget.classList.add("fas");
     // Ajoutez ici la logique pour ajouter le like côté serveur si nécessaire
   }
-  this.isLiked = !this.isLiked;
 }
 
   // isLiked() {
