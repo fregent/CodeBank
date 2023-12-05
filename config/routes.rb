@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
+  resources :like
 
   get 'snippets/my_favorites', to: 'snippets#favorites', as: :my_favorites
 
   resources :snippets do
+    post "new_like" , to: 'likes#new_like'
+
     member do
       post 'add_to_directory'
       post 'save_to_directory'
     end
   end
+
+  get "likes_index" , to: 'likes#likes_index'
   resources :directories do
     member do
       post 'add_snippet'
@@ -25,4 +30,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-end
+end 

@@ -28,6 +28,20 @@
           <% end %>
         <% end %>
       </div>
+
+<%= link_to snippet_new_like_path(snippet), data: { 'turbo-method' => :post } do %>
+  <button type="submit" class="like-button" data-controller="like" data-action="click->like#like">
+    <% if Like.where(user: @current_user, snippet: snippet).count == 0 %>
+     <i class="far fa-heart" data-target="like.heart"></i>
+
+    <% else %>
+      <i class="fas fa-heart"></i>
+
+    <% end %>
+    <%# <span class="like-count"><%= @post.likes.count %>
+  </button>
+  <% end %>
+
     </div>
   <% end %>
 </div>
