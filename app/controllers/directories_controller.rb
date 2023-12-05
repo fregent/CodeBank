@@ -60,11 +60,34 @@ class DirectoriesController < ApplicationController
       redirect_to directory_path(@directory)
     end
 
-    def show
+    def update_snippet
       @directory = Directory.find(params[:id])
-      @snippets = @directory.snippets
-      @new_snippet = Snippet.new
+      @snippet = @directory.snippets.find(params[:snippet_id])
+      @directories_snippet = DirectoriesSnippet.find_by(directory_id: @directory.id, snippet_id: @snippet.id)
+
+      if @snippet.update(snippet_params)
+        flash[:notice] = "Snippet updated successfully in the directory."
+      else
+        flash[:alert] = "Failed to update snippet in the directory."
+      end
+
+      redirect_to directory_path(@directory)
     end
+
+
+
+  def show
+    @directory = Directory.find(params[:id])
+    @snippets = @directory.snippets
+    @new_snippet = Snippet.new
+    @user = current_user
+    @user_snippets = Snippet.where(user: current_user)
+    @public_snippets = Snippet.where(private: false)
+    @combined_snippets = @user_snippets + @public_snippets
+
+    # Assurez-vous que @snippet est correctement défini, par exemple, en utilisant le premier snippet dans @snippets
+    @snippet = @snippets.first
+  end
 
     def new
       @directory = Directory.new
@@ -87,24 +110,25 @@ class DirectoriesController < ApplicationController
 
     def update
       @directory = Directory.find(params[:id])
+
       if @directory.update(directory_params)
-        redirect_to directory_path(@directory), notice: "Directory updated with success."
+        flash[:notice] = "Directory updated successfully."
       else
-        render :edit
+        flash[:alert] = "Failed to update directory."
       end
+
+      redirect_to edit_directory_path(@directory)
     end
+
 
     def destroy
       @directory = Directory.find(params[:id])
-      @snippet = Snippet.find(params[:snippet_id])
-      @snippets = @directory.snippets
-
-      @snippets.each do |snippet|
-        snippet.destroy
+      @directories_snippets = DirectoriesSnippet.where(directory_id: @directory.id)
+      @directories_snippets.each do |dir_snip|
+        dir_snip.destroy
       end
-
       @directory.destroy
-      redirect_to directories_path, notice: 'Directory and associated snippets successfully deleted.'
+      redirect_to my_directories_path, notice: 'Directory and associated snippets successfully deleted.'
     end
 
 
@@ -113,7 +137,7 @@ class DirectoriesController < ApplicationController
         @snippet = Snippet.find(params[:snippet_id])
 
         if @directory.snippets.include?(@snippet)
-          @directory.snippets.delete(@snippet)
+          @directory.snippets.destroy(@snippet)
           flash[:notice] = 'Snippet removed from the directory with success!'
         else
           flash[:alert] = 'This snippet does not exist in this directory!'
