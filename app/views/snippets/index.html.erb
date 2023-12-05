@@ -2,9 +2,9 @@
 
 <% if @search_results.present? %>
   <% if @search_results.count == 1 %>
-    <h2>1 result found</h2>
+    <h2>1 result found for "<%= @query %>"</h2>
   <% else %>
-    <h2><%= @search_results.count %> results found</h2>
+    <h2><%= @search_results.count %> results found for "<%= @query %>"</h2>
   <% end %>
   <div class="card-container my-5">
     <% @search_results.each do |result| %>

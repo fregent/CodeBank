@@ -1,15 +1,13 @@
 <% @likes.each do |like| %>
-  <!-- Affichage des détails du post favori -->
   <div class="favorite-post">
     <%= like.snippet.title %>
 
-      <div class="buttons-action d-flex justify-content-between">
-        <% if current_user == like.user %>
-          <%= link_to like_path(like), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
-            <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
-          <% end %>
+    <div class="buttons-action d-flex justify-content-between">
+      <% if current_user == like.user %>
+        <%= link_to like_path(like), data: { turbo_method: :delete, turbo_confirm: "Do you want to remove this snippet from your favorites ?" }, class: "btn btn-info btn-sup" do %>
+          <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
         <% end %>
-    <!-- Ajoutez d'autres détails du post que vous souhaitez afficher -->
+      <% end %>
+    </div>
   </div>
-   </div>
 <% end %>

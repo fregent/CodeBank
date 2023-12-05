@@ -1,10 +1,13 @@
-<%= simple_form_for [@snippet] do |f| %>
-  <div class="edit-form modal-text my-5">
-    <%= f.input :title, as: :string, label: 'Title', placeholder: "Type your code's title here...", input_html: { style: 'border-color: black;' } %>
-    <%= f.input :content, as: :text, label: 'Your code', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window' , id: 'your-textarea' } %>
-    <%= f.input :description, as: :text, label: 'Description of your code', placeholder: "Explain your code here", input_html: { style: 'border-color: black;' } %>
-    <%= f.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
-    <%= f.input :private, as: :boolean, label: 'Make it private?', checked_value: 'true', unchecked_value: 'false', input_html: { style: 'border-color: black;' } %>
-    <%= f.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
-  </div>
-<% end %>
+<div class="text-start">
+  <%= link_to "<span><i class='fa-solid fa-arrow-left pe-1'></i>Go Back</span>".html_safe, :back, class:"btn btn-secondary rounded-pill btn-sm" %>
+  <%= simple_form_for [@snippet] do |f| %>
+    <div class="edit-form my-5">
+      <%= f.input :title, as: :string, label: 'Title', placeholder: "Type your code's title here...", input_html: { style: 'border-color: black;' } %>
+      <%= f.input :content, as: :text, label: 'Your code', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window' , id: 'your-textarea' } %>
+      <%= f.input :description, as: :text, label: 'Description of your code', placeholder: "Explain your code here", input_html: { style: 'border-color: black; height: 128px;' } %>
+      <%= f.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
+      <%= f.input :private, as: :boolean, label: 'Make it private?', checked_value: 'true', unchecked_value: 'false', input_html: { style: 'border-color: black;' } %>
+      <%= f.button :submit, "Update", class: "btn btn-primary mt-3", id: :btn_add %>
+    </div>
+  <% end %>
+</div>
