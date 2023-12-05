@@ -10,6 +10,8 @@ class LikesController < ApplicationController
         @like = Like.new(user: @user, snippet: @snippet, like: true)
         if Like.where(user: @user, snippet: @snippet).count == 0
           @like.save
+        else
+          Like.where(user: @user, snippet: @snippet).first.destroy
         end
       end
 
