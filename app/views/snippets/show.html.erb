@@ -1,56 +1,61 @@
 <div class="my-5 flex">
   <%= link_to "Go Back",  snippets_path, class:"btn btn-primary rounded-pill btn-sm" %>
 
-  <button type="button" class="btn btn-success rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Add this snippet to a directory
-  </button>
+  <% if user_signed_in? %>
+    <button type="button" class="btn btn-success rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Add this snippet to a directory
+    </button>
+  <% end %>
+
 </div>
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+<% if user_signed_in? %>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Which directory to you want to add this snippet?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-backdrop="false"></button>
-      </div>
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Which directory to you want to add this snippet?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-backdrop="false"></button>
+        </div>
 
-      <div class="modal-body" style="
-                  padding-right: 50px;
-                  padding-left: 50px;
-                  margin-top: 15px;
-                  margin-bottom: 15px;">
+        <div class="modal-body" style="
+                    padding-right: 50px;
+                    padding-left: 50px;
+                    margin-top: 15px;
+                    margin-bottom: 15px;">
 
-         <!-- app/views/directories/show.html.erb -->
+          <!-- app/views/directories/show.html.erb -->
 
-        <%= form_with(url: add_to_directory_snippet_path(@snippet), method: :post, local: true) do |form| %>
-          <div class="field">
-            <%= form.label :directory_id %>
-            <%= form.collection_select(:directory_id, current_user.directories, :id, :name, prompt: "Choose a directory", class: "directory-select") %>
-          </div>
-          <div class="actions">
-            <%= form.submit "Add to directory" %>
-          </div>
-        <% end %>
+          <%= form_with(url: add_to_directory_snippet_path(@snippet), method: :post, local: true) do |form| %>
+            <div class="field">
+              <%= form.label :directory_id %>
+              <%= form.collection_select(:directory_id, current_user.directories, :id, :name, prompt: "Choose a directory", class: "directory-select") %>
+            </div>
+            <div class="actions">
+              <%= form.submit "Add to directory" %>
+            </div>
+          <% end %>
 
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="buttons-action d-flex justify-content-end">
-  <% if current_user == @snippet.user %>
-    <%= link_to snippet_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
-      <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
+  <div class="buttons-action d-flex justify-content-end">
+    <% if current_user == @snippet.user %>
+      <%= link_to snippet_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
+        <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
+      <% end %>
     <% end %>
-  <% end %>
 
-  <% if current_user == @snippet.user %>
-    <%= link_to edit_snippet_path(@snippet), class: "btn btn-info edit-pen" do %>
-      <i class="fa-solid fa-pencil fa-bounce"></i>
+    <% if current_user == @snippet.user %>
+      <%= link_to edit_snippet_path(@snippet), class: "btn btn-info edit-pen" do %>
+        <i class="fa-solid fa-pencil fa-bounce"></i>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <div class="show-container" data-controller="copy-to-clipboard">
   <h2 class="code-title"><%= @snippet.title&.capitalize %></h2>
