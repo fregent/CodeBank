@@ -1,0 +1,11 @@
+.heart-icon {
+  fill: red; /* Couleur du cœur vide */
+  width: 24px; /* Taille de l'icône */
+  height: 24px;
+  vertical-align: middle;
+}
+
+/* Style pour l'icône de favori pleine */
+.heart-icon.filled {
+  fill: red;
+}
