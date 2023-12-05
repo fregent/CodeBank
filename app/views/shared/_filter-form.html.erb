@@ -1,0 +1,4 @@
+<%= form_tag(snippets_path, method: :get, class: 'filter-form mb-5') do %>
+  <%= select_tag(:language, options_for_select(Snippet.pluck(:language).uniq, params[:language]), prompt: 'All languages', class: 'form-control') %>
+  <%= submit_tag('Filter', class: 'btn btn-secondary') %>
+<% end %>

@@ -13,12 +13,14 @@ validation = gets.chomp
 if validation.include?("Y")
 
   puts "Cleaning database..."
-  User.destroy_all
+  # User.destroy_all
+  # Snippet.destroy_all
+  # Directory.destroy_all
   puts "Creating new users..."
 
-  # Create Users
 
-  # Selma
+
+
   User.create!(
     first_name: "Salma",
     last_name: "Zakha",

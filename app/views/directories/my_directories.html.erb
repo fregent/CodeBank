@@ -1,8 +1,8 @@
-<%= link_to "All Snippets",  snippets_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
 
-<h2 class="my-5">Directories</h2>
+<h2>My Directories</h2>
 
 <%= render "shared/modal_directory", directories: @directory %>
+
 
 <% if @search_results.present? %>
   <% if @search_results.count == 1 %>
@@ -10,10 +10,10 @@
   <% else %>
     <h2><%= @search_results.count %> results found:</h2>
   <% end %>
-  <div class="card-container my-5">
+  <div class="card-container">
     <% @search_results.each do |result| %>
       <% if result.searchable_type == 'Snippet' %>
-        <%= render "shared/snippet_cards", snippet: result.searchable %>
+        <%= render "shared/cards", snippet: result.searchable %>
       <% elsif result.searchable_type == 'Directory' %>
         <%= render "shared/directory_cards", directory: result.searchable %>
       <% end %>
@@ -21,6 +21,10 @@
   </div>
 
 <% else %>
+  <%= render "shared/filter-form" %>
+<h2 class="mt-5">
+  <%= @directories.count == 1 ? "You have #{@directories.count} directories" : "You have #{@directories.count} directories" %>
+</h2>
   <div class="card-container my-5">
     <% @directories.each do |directory| %>
       <%= render "shared/directory_cards", directory: directory %>

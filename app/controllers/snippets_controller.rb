@@ -2,19 +2,48 @@ class SnippetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @snippet = Snippet.new
+    @snippets = Snippet.all.where(private: false)
     @user = current_user
-    @public_snippets = Snippet.where(private: false)
-    @snippets_user = @user.snippets
-    @snippets = @public_snippets + @snippets_user
-    @snippets = Snippet.where(language: params[:language], private: false) if params[:language].present?
-
+    # @snippets = Snippet.where(
+    #   '(user_id = ?) OR (private = ?)',
+    #   current_user.id, false
+    # )
     if params[:query].present?
       @search_results = PgSearch.multisearch(params[:query])
     else
       @snippets
       @snippets = @snippets.where(language: params[:language]) if params[:language].present?
     end
-    @directories_user = @user.directories
+  end
+
+  def my_snippets
+    @snippet = Snippet.new
+    @user = current_user
+    @snippets = @user.snippets
+    # @snippets = Snippet.where(
+    #   '(user_id = ?) OR (private = ?)',
+    #   current_user.id, false
+    # )
+    if params[:query].present?
+      @search_results = PgSearch.multisearch(params[:query])
+    else
+      @snippets
+      @snippets = @snippets.where(language: params[:language]) if params[:language].present?
+    end
+
+  end
+
+def create_snippet_directory
+    @directory = Directory.find(params[:id])
+    @snippet = @directory.snippets.build(snippet_params)
+
+    if @snippet.save
+      flash[:notice] = "Snippet created and added to the directory with success."
+    else
+      flash[:alert] = "Failed to create snippet."
+    end
+
+    redirect_to directory_path(@directory)
   end
 
   def add_to_directory
@@ -22,8 +51,7 @@ class SnippetsController < ApplicationController
     @directories = current_user.directories
 
     # Assure-toi que tu as l'ID du répertoire sélectionné dans les paramètres
-    selected_directory_id = params[:selected_directory_id]
-
+    selected_directory_id = params[:directory_id]
     # Vérifie si le snippet n'est pas déjà dans le répertoire sélectionné
     if selected_directory_id && !Directory.find(selected_directory_id).snippets.include?(@snippet)
       # Ajoute le snippet au répertoire sélectionné
@@ -32,8 +60,7 @@ class SnippetsController < ApplicationController
     else
       flash[:alert] = 'This snippet already exists in the selected directory!'
     end
-
-    redirect_to directories_path
+    redirect_to directory_path(selected_directory_id)
   end
 
 
@@ -88,6 +115,22 @@ class SnippetsController < ApplicationController
       @snippet.destroy
     end
     redirect_to snippets_path
+  end
+
+  def remove_snippet
+    @directory = Directory.find(params[:id])
+    @snippet = Snippet.find(params[:snippet_id])
+
+    @directories_snippet = DirectoriesSnippet.find_by(directory_id: @directory.id, snippet_id: @snippet.id)
+
+    if @directories_snippet
+      @directories_snippet.destroy
+      flash[:notice] = 'Snippet removed from the directory with success!'
+    else
+      flash[:alert] = 'This snippet does not exist in this directory!'
+    end
+
+    redirect_to directory_path(@directory)
   end
 
   def share

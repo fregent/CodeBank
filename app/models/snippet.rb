@@ -1,3 +1,4 @@
+# app/models/snippet.rb
 class Snippet < ApplicationRecord
   include PgSearch::Model
   multisearchable against: [:title, :content, :language],
@@ -6,9 +7,9 @@ class Snippet < ApplicationRecord
                     trigram: { threshold: 0.1 }
                   }
   belongs_to :user
-  has_many :directory_snippets
-  has_many :directories, through: :directory_snippets
+  has_many :directories_snippets
+  has_many :directories, through: :directories_snippets
   has_many :comments, dependent: :destroy
   has_many :likes
-  validates :title, presence: true
+  validates :title, :content, :language, presence: true
 end
