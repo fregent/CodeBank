@@ -15,7 +15,9 @@
       <div class="main">
         <main class="content px-3 py-2">
           <div class="container-fluid">
-            <%= render "shared/searchbar" %>
+            <div class="mx-auto">
+              <%= render "shared/searchbar" %>
+            </div>
             <%= yield %>
             <%= render "shared/flashes" %>
           </div>

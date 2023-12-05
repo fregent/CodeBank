@@ -43,7 +43,7 @@
 
   <div class="buttons-action d-flex justify-content-end">
     <% if current_user == @snippet.user %>
-      <%= link_to snippet_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
+      <%= link_to snippet_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this snippet?" }, class: "btn btn-info btn-sup" do %>
         <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
       <% end %>
     <% end %>
@@ -60,7 +60,7 @@
   <h2 class="code-title"><%= @snippet.title&.capitalize %></h2>
 
   <div class="code-bar">
-    
+
     <h6><%= @snippet.language%></h6>
 
     <button data-action="click->copy-to-clipboard#copy" class="btn">

@@ -1,0 +1,4 @@
+<div class="d-flex justify-content-between my-5">
+  <%= link_to "My Directories", directories_path, class:"btn btn-secondary rounded-pill btn-sm" %>
+  <%= render "shared/modal_snippet", snippets: @snippet if user_signed_in? %>
+</div>

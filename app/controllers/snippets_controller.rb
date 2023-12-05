@@ -1,6 +1,7 @@
 class SnippetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
+
     @snippet = Snippet.new
     @snippets = Snippet.all.where(private: false)
     @user = current_user
@@ -14,9 +15,11 @@ class SnippetsController < ApplicationController
       @snippets
       @snippets = @snippets.where(language: params[:language]) if params[:language].present?
     end
+
   end
 
   def my_snippets
+
     @snippet = Snippet.new
     @user = current_user
     @snippets = @user.snippets
