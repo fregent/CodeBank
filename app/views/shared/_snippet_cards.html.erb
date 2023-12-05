@@ -22,8 +22,15 @@
 
       <p class="mb-3"><% snippet.created_at.strftime("%d/%m/%Y") %></p>
 
+      <%= link_to snippet_new_like_path(snippet), data: { 'turbo-method' => :post } do %>
+        <% if Like.where(user: @current_user, snippet: snippet).count == 0 %>
+          <i data-controller="like" data-action="click->like#like" class="far fa-heart" data-like-target="heart"></i>
+        <% else %>
+          <i data-controller="like" data-action="click->like#like" class="fas fa-heart" data-like-target="heart"></i>
 
-    <footer>
+        <% end %>
+          <%# <span class="like-count"><%= @post.likes.count %>
+      <% end %>
       <div class="buttons-action d-flex justify-content-between">
         <% if current_user == snippet.user %>
           <%= link_to edit_snippet_path(snippet), class: "btn btn-info edit-pen" do %>
@@ -34,19 +41,6 @@
           <% end %>
         <% end %>
       </div>
-
-
-   <div>
-    <%= link_to snippet_new_like_path(snippet), data: { 'turbo-method' => :post } do %>
-        <% if Like.where(user: @current_user, snippet: snippet).count == 0 %>
-            <i data-controller="like" data-action="click->like#like" class="far fa-heart" data-like-target="heart"></i>
-          <% else %>
-            <i data-controller="like" data-action="click->like#like" class="fas fa-heart" data-like-target="heart"></i>
-
-        <% end %>
-      <% end %>
-
-  </div>
+    </div>
   <% end %>
-   </footer>
 </div>
