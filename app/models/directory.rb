@@ -8,5 +8,5 @@ class Directory < ApplicationRecord
 
   belongs_to :user
   has_many :directories_snippets
-  has_many :snippets, through: :directories_snippets
+  has_many :snippets, through: :directories_snippets, dependent: :destroy
 end

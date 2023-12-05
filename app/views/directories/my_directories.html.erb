@@ -23,7 +23,7 @@
 <% else %>
   <%= render "shared/filter-form" %>
 <h2 class="mt-5">
-  <%= @directories.count == 1 ? "You have #{@directories.count} directories" : "You have #{@directories.count} directories" %>
+  <%= @directories.count == 1 ? "You have #{@directories.count} directory" : "You have #{@directories.count} directories" %>
 </h2>
   <div class="card-container my-5">
     <% @directories.each do |directory| %>

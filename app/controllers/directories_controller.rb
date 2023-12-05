@@ -87,24 +87,25 @@ class DirectoriesController < ApplicationController
 
     def update
       @directory = Directory.find(params[:id])
+
       if @directory.update(directory_params)
-        redirect_to directory_path(@directory), notice: "Directory updated with success."
+        flash[:notice] = "Directory updated successfully."
       else
-        render :edit
+        flash[:alert] = "Failed to update directory."
       end
+
+      redirect_to edit_directory_path(@directory)
     end
+
 
     def destroy
       @directory = Directory.find(params[:id])
-      @snippet = Snippet.find(params[:snippet_id])
-      @snippets = @directory.snippets
-
-      @snippets.each do |snippet|
-        snippet.destroy
+      @directories_snippets = DirectoriesSnippet.where(directory_id: @directory.id)
+      @directories_snippets.each do |dir_snip|
+        dir_snip.destroy
       end
-
       @directory.destroy
-      redirect_to directories_path, notice: 'Directory and associated snippets successfully deleted.'
+      redirect_to my_directories_path, notice: 'Directory and associated snippets successfully deleted.'
     end
 
 

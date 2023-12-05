@@ -2,6 +2,7 @@
 <br>
 <%= link_to "<= All public Snippets",  snippets_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
 <h2>Name of directory : <%= @directory.name %></h2>
+
 <% if @directory.private == true%>
         <p class="snippet-status">Directory Status: Private</p>
       <%else%>
