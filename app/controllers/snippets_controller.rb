@@ -3,12 +3,11 @@ class SnippetsController < ApplicationController
   def index
 
     @snippet = Snippet.new
-    @snippets = Snippet.all.where(private: false)
     @user = current_user
-    # @snippets = Snippet.where(
-    #   '(user_id = ?) OR (private = ?)',
-    #   current_user.id, false
-    # )
+    @user_snippets = Snippet.where(user: current_user)
+    @public_snippets = Snippet.where(private: false)
+    @snippets = @user_snippets + @public_snippets
+
     if params[:query].present?
       @search_results = PgSearch.multisearch(params[:query])
     else
@@ -37,10 +36,12 @@ class SnippetsController < ApplicationController
   end
 
 def create_snippet_directory
-    @directory = Directory.find(params[:id])
-    @snippet = @directory.snippets.build(snippet_params)
-
+    @directory = Directory.find(params[:snippet][:directory_id])
+    @snippet = Snippet.new(snippet_params)
+    @snippet.user = current_user
     if @snippet.save
+      @directory_snippet = DirectoriesSnippet.new(directory_id: @directory.id, snippet_id: @snippet.id)
+      @directory_snippet.save
       flash[:notice] = "Snippet created and added to the directory with success."
     else
       flash[:alert] = "Failed to create snippet."
