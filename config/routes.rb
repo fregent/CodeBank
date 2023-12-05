@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post 'add_snippet'
       post 'create_snippet', to: 'snippets#create_snippet_directory'
       get 'remove_snippet'
+      get 'update_snippet'
     end
   end
 
