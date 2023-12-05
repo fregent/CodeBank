@@ -1,12 +1,11 @@
 <div class="my-5 flex">
-  <%= link_to "Go Back",  snippets_path, class:"btn btn-primary rounded-pill btn-sm" %>
+  <%= link_to "Go Back",  my_snippets_path, class:"btn btn-primary rounded-pill btn-sm" %>
 
   <% if user_signed_in? %>
     <button type="button" class="btn btn-success rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
       Add to directory
     </button>
   <% end %>
-
 </div>
 
 <% if user_signed_in? %>
@@ -61,7 +60,7 @@
   <h2 class="code-title"><%= @snippet.title&.capitalize %></h2>
 
   <div class="code-bar">
-
+    
     <h6><%= @snippet.language%></h6>
 
     <button data-action="click->copy-to-clipboard#copy" class="btn">

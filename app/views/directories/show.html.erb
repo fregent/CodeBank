@@ -1,5 +1,8 @@
+<%= link_to "All Snippets",  snippets_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
 <%= link_to "Go Back",  directories_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
+
 <h2><%= @directory.name %></h2>
+
 <% if @directory.private == true%>
   <p class="snippet-status">Directory Status: Private</p>
 <% else %>
@@ -26,13 +29,12 @@
     <div data-controller="toggle" class="mt-5">
       <button data-action="click->toggle#fire" class="btn btn-outline-primary">Create a new Snippet in this Directory</button>
       <div data-toggle-target="togglableElement" class="d-none">
-
-        <%= simple_form_for [@directory, @new_snippet], url: { action: :create }, local: true do |form| %>
+        <%= simple_form_for Snippet.new, url: create_snippet_directory_path(@directory), local: true do |form| %>
           <%= form.input :directory_id, as: :hidden, input_html: { value: @directory.id } %>
           <%= form.input :title, label: 'Title:', placeholder: "Type your code's title here...", input_html: { style: 'border-color: black;' } %>
-          <%= form.input :content, label: 'Your code:', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window', id: 'your-textarea' } %>
-          <%= form.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code:', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
-          <%= form.input :private, as: :boolean, label: 'Make it private?', checked_value: 'positive', unchecked_value: 'negative', input_html: { style: 'border-color: black;' } %>
+          <%= form.input :content, label: 'Your code:', placeholder: 'Enter your code here', input_html: { style: 'border-color: black;', class: 'code-window', id: 'your-textarea' } %>
+          <%= form.input :language, label: 'Select the language of your code:', collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], input_html: { style: 'border-color: black;' } %>
+          <%= form.input :private, label: 'Make it private?', placeholder: 'Enter private value', input_html: { style: 'border-color: black;' } %>
           <%= form.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
         <% end %>
       </div>
@@ -41,12 +43,11 @@
 
   <% if @directory.snippets.any? %>
     <h2>Snippets in this directory:</h2>
-    <ul>
-      <% @directory.snippets.each do |snippet| %>
-        <%= render "shared/snippet_cards", snippet: snippet %>
-        <!-- Ajoutez d'autres détails du snippet selon vos besoins -->
-      <% end %>
-    </ul>
+
+    <% @directory.snippets.each do |snippet| %>
+      <%= render "shared/snippet_cards", snippet: snippet %>
+      <%= link_to "Remove from directory", remove_snippet_directory_path(@directory, snippet_id: snippet.id), method: :delete, data: { turbo_confirm: "Are you sure you want to remove this snippet from the directory?" }, class: "btn btn-danger" %>
+    <% end %>
   <% else %>
     <p>No snippets in this directory.</p>
   <% end %>
