@@ -9,26 +9,33 @@
         <p>Directory Status: Public</p>
       <%end%>
 
-        <div class="buttons-action">
-            <% if current_user == @directory.user%>
-                <%= link_to directory_path(@directory), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce directory?" }, class: "btn btn-info btn-sup" do%>
-                <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
-              <% end %>
-            <% end %>
-              <% if current_user == @directory.user%>
-                  <%= link_to edit_directory_path(@directory), class: "btn btn-info edit-pen" do%>
-                  <i class="fa-solid fa-pencil fa-bounce"></i>
-                <% end %>
-              <% end %>
-         </div>
+<h2><%= @directory.name %></h2>
+
+<% if @directory.private == true%>
+  <p class="snippet-status">Directory Status: Private</p>
+<% else %>
+  <p>Directory Status: Public</p>
+<% end %>
+
+<div class="buttons-action">
+  <% if current_user == @directory.user%>
+      <%= link_to directory_path(@directory), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce directory?" }, class: "btn btn-info btn-sup" do%>
+      <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
+    <% end %>
+  <% end %>
+  <% if current_user == @directory.user%>
+      <%= link_to edit_directory_path(@directory), class: "btn btn-info edit-pen" do%>
+      <i class="fa-solid fa-pencil fa-bounce"></i>
+    <% end %>
+  <% end %>
+</div>
 
 <div class="show-container">
-    <div class="show-code">
+  <div class="show-code">
+    <%=render "shared/add_snippet_form"%>
 
-        <%=render "shared/add_snippet_form"%>
-
-   <div data-controller="toggle" class="mt-5">
-  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Create a new Snippet in this Directory</button>
+    <div data-controller="toggle" class="mt-5">
+      <button data-action="click->toggle#fire" class="btn btn-outline-primary">Create a new Snippet in this Directory</button>
       <div data-toggle-target="togglableElement" class="d-none">
 
     <%= simple_form_for Snippet.new, url: create_snippet_directory_path(@directory), method: :post, local: true do |form| %>
@@ -42,8 +49,11 @@
 
         </div>
       </div>
+    </div>
   </div>
 
+  <% if @directory.snippets.any? %>
+    <h2>Snippets in this directory:</h2>
 
               <% if @directory.snippets.any? %>
   <h2>Snippets in this directory:</h2>

@@ -45,6 +45,25 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_154935) do
     t.index ["snippet_id"], name: "index_directories_snippets_on_snippet_id"
   end
 
+  create_table "directory_snippets", force: :cascade do |t|
+    t.bigint "directory_id", null: false
+    t.bigint "snippet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["directory_id"], name: "index_directory_snippets_on_directory_id"
+    t.index ["snippet_id"], name: "index_directory_snippets_on_snippet_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.boolean "like"
+    t.bigint "user_id", null: false
+    t.bigint "snippet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["snippet_id"], name: "index_likes_on_snippet_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "pg_search_documents", force: :cascade do |t|
     t.text "content"
     t.string "searchable_type"
@@ -109,6 +128,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_154935) do
   add_foreign_key "directories", "users"
   add_foreign_key "directories_snippets", "directories"
   add_foreign_key "directories_snippets", "snippets"
+  add_foreign_key "directory_snippets", "directories"
+  add_foreign_key "directory_snippets", "snippets"
+  add_foreign_key "likes", "snippets"
+  add_foreign_key "likes", "users"
   add_foreign_key "snippets", "users"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "users"
