@@ -5,13 +5,16 @@
 
 <%= render "shared/filter-form" %>
 
-<% @likes.each do |like| %>
-  <div class="favorite-post">
-    <div class="dir-snippet">
-      <%= render "shared/snippet_cards", snippet: like.snippet %>
-      <% if current_user == like.user %>
-        <%= link_to "<span class=''><i class='fa-solid fa-trash' style='color: red'></i></span>".html_safe, like_path(like), data: { turbo_method: :delete, turbo_confirm: "Do you want to remove this snippet from your favorites ?" } %>
-      <% end %>
+<div class="card-container my-5">
+  <% @likes.each do |like| %>
+    <div class="favorite-post">
+      <div class="dir-snippet">
+
+        <%= render "shared/snippet_cards", snippet: like.snippet %>
+        <% if current_user == like.user %>
+          <%= link_to "<span class=''><i class='fa-solid fa-trash' style='color: red'></i></span>".html_safe, like_path(like), data: { turbo_method: :delete, turbo_confirm: "Do you want to remove this snippet from your favorites ?" } %>
+        <% end %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
