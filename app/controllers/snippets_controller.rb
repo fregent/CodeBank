@@ -78,6 +78,7 @@ def create_snippet_directory
 
   def show
     @snippet = Snippet.find(params[:id])
+    @reviews = Review.where(snippet: @snippet)
   end
 
   def new
