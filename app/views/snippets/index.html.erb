@@ -1,14 +1,10 @@
-<%= link_to "<= All Directories",  directories_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
-<br>
-<%= render "shared/modal_snippet", snippets: @snippet if user_signed_in? %>
-
-
+<%= render "shared/snippet_buttons", snippets: @snippet if user_signed_in? %>
 
 <% if @search_results.present? %>
   <% if @search_results.count == 1 %>
-    <h2>1 result found</h2>
+    <h2>1 result found for "<%= @query %>"</h2>
   <% else %>
-    <h2><%= @search_results.count %> results found</h2>
+    <h2><%= @search_results.count %> results found for "<%= @query %>"</h2>
   <% end %>
   <div class="card-container my-5">
     <% @search_results.each do |result| %>
