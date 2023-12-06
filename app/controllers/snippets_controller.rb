@@ -19,18 +19,24 @@ class SnippetsController < ApplicationController
     @snippet = Snippet.new
     @user = current_user
     @snippets = @user.snippets
-    # @snippets = Snippet.where(
-    #   '(user_id = ?) OR (private = ?)',
-    #   current_user.id, false
-    # )
-    if params[:query].present?
-      @search_results = PgSearch.multisearch(params[:query])
-    else
-      @snippets
-      @snippets = @snippets.where(language: params[:language]) if params[:language].present?
-    end
+    @query = params[:query]
+    @language = params[:language]
 
+    if params[:query].present?
+      @search_filtered = @snippets.where(language: params[:language])
+      @search_results = @search_filtered.pg_search(params[:query])
+
+      # Si le paramètre de langue est présent, filtrer les résultats de la recherche par langue
+    elsif params[:query].present? == false && params[:language].present?
+      @snippets = @snippets.where(language: params[:language]) if params[:language].present?
+    else
+    # elsif params[:language] == "All language"
+      @snippets
+    end
   end
+
+
+
 
 def create_snippet_directory
     @directory = Directory.find(params[:snippet][:directory_id])

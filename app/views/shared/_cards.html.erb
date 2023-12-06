@@ -1,4 +1,6 @@
-<div class="card m-3">
+<div data-controller="toggle">
+<div class="card m-3"
+data-toggle-target="togglableElement">
   <%= link_to snippet_path(snippet), class: "text-decoration-none" do %>
     <div class="content">
       <div class="">
@@ -25,7 +27,6 @@
           <i data-controller="like" data-action="click->like#like" class="fas fa-heart" data-like-target="heart"></i>
 
         <% end %>
-          <%# <span class="like-count"><%= @post.likes.count %>
       <% end %>
 
       <div class="buttons-action d-flex justify-content-between">
@@ -40,4 +41,5 @@
       </div>
     </div>
   <% end %>
+</div>
 </div>
