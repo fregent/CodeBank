@@ -1,10 +1,10 @@
-
-<h2>My Directories</h2>
-
-<%= render "shared/modal_directory", directories: @directory %>
-
+<div class="d-flex justify-content-between my-5">
+  <%= link_to "<span><i class='fa-solid fa-code pe-1'></i>My Snippets</span>".html_safe, my_snippets_path, class:"btn btn-secondary rounded-pill btn-sm" %>
+  <%= render "shared/modal_directory", directories: @directory %>
+</div>
 
 <% if @search_results.present? %>
+
   <% if @search_results.count == 1 %>
     <h2>1 result found</h2>
   <% else %>
@@ -21,10 +21,10 @@
   </div>
 
 <% else %>
-  <%= render "shared/filter-form" %>
-<h2 class="mt-5">
-  <%= @directories.count == 1 ? "You have #{@directories.count} directory" : "You have #{@directories.count} directories" %>
-</h2>
+  <% render "shared/filter-form" %>
+  <h2 class="mt-5">
+    <%= @directories.count == 1 ? "You have #{@directories.count} directory" : "You have #{@directories.count} directories" %>
+  </h2>
   <div class="card-container my-5">
     <% @directories.each do |directory| %>
       <%= render "shared/directory_cards", directory: directory %>

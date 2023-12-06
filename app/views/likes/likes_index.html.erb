@@ -1,15 +1,17 @@
-<% @likes.each do |like| %>
-  <!-- Affichage des détails du post favori -->
-  <div class="favorite-post">
-    <%= like.snippet.title %>
+<div class="d-flex justify-content-between my-5">
+  <%= link_to "<span><i class='fa-solid fa-code pe-1'></i>My Snippets</span>".html_safe, my_snippets_path, class:"btn btn-secondary rounded-pill btn-sm" %>
+  <%= link_to "<span><i class='fa-solid fa-folder pe-1'></i>My Directories</span>".html_safe, my_directories_path, class:"btn btn-secondary rounded-pill btn-sm" %>
+</div>
 
-      <div class="buttons-action d-flex justify-content-between">
-        <% if current_user == like.user %>
-          <%= link_to like_path(like), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
-            <i class="fa-solid fa-trash-arrow-up fa-bounce"></i>
-          <% end %>
-        <% end %>
-    <!-- Ajoutez d'autres détails du post que vous souhaitez afficher -->
+<%= render "shared/filter-form" %>
+
+<% @likes.each do |like| %>
+  <div class="favorite-post">
+    <div class="dir-snippet">
+      <%= render "shared/snippet_cards", snippet: like.snippet %>
+      <% if current_user == like.user %>
+        <%= link_to "<span class=''><i class='fa-solid fa-trash' style='color: red'></i></span>".html_safe, like_path(like), data: { turbo_method: :delete, turbo_confirm: "Do you want to remove this snippet from your favorites ?" } %>
+      <% end %>
+    </div>
   </div>
-   </div>
 <% end %>
