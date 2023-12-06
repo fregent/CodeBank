@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
 
-  resources :likes
+  resources :likes do
+    resources :reviews, only: [:new, :create, :destroy]
+  end
 
 
 
@@ -44,4 +47,3 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 end
-
