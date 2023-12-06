@@ -14,17 +14,17 @@
   <div class="bg-secondary text-white">
     <h2><%= @directory.name %></h2>
 
-    <div class="mb-5">
+    <div>
       <% if @directory.private %>
-        <p class="snippet-status">Directory Status: Private</p>
+        <p>Directory Status: Private</p>
       <% else %>
-        <p class="snippet-status">Directory Status: Public</p>
+        <p>Directory Status: Public</p>
       <% end %>
     </div>
   </div>
 
 
-  <div class="my-5">
+  <div class="dir-bg">
     <% if @directory.snippets.any? %>
       <%# Snippets saved in this directory %>
       <% @directory.snippets.each do |snippet| %>
