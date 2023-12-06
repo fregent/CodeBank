@@ -1,11 +1,16 @@
 <% video_tag 'background-video.mp4', autoplay: :autoplay, loop: :loop, muted: :muted %>
-<div class="container-fluid">
-  <div class="row flex-nowrap">
-    <div class="col py-3" id="content">
-      <h2>Welcome to CodeBank!</h2>
-      <p>Save your code, save your time.</p>
-      <div class="d-grid gap-2 col-4 mx-auto">
-        <%= link_to "Explore", snippets_path, class:"btn btn-primary rounded-pill " %>
+<div id="bg-video-div">
+  <video autoplay loop muted playsinline id="background-video">
+    <source src="<%= asset_path('background-video.mp4') %>" type="video/mp4">
+  </video>
+  <div class="container-fluid" id="front-layer">
+    <div class="row flex-nowrap">
+      <div class="col py-3" id="content">
+        <h2>Welcome to CodeBank!</h2>
+        <p>Save your code, save your time.</p>
+        <div class="d-grid gap-2 col-4 mx-auto">
+          <%= link_to "Explore", snippets_path, class:"btn btn-primary rounded-pill " %>
+        </div>
       </div>
     </div>
   </div>
