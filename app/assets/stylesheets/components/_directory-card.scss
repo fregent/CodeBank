@@ -39,7 +39,17 @@
   width: fit-content;
   border-style: solid;
   border-top: 0;
-  border-color: $cb_gray;
+  border-color: #cecfdb;
   border-radius: 25px;
   border-width: 1px;
+  display: inline-block;
+}
+
+.dir-snippet:hover {
+  border-style: none;
+  transition: 0.9;
+}
+
+.dir-bg {
+  background-color: #dfdfdf;
 }

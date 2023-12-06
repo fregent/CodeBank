@@ -6,25 +6,26 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Adding a snippet</h5>
+        <h5 class="modal-title text-primary" id="staticBackdropLabel">Adding a snippet</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-backdrop="false"></button>
       </div>
       <div class="modal-body" style="
                     padding-right: 50px;
                     padding-left: 50px;
                     margin-top: 15px;
-                    margin-bottom: 15px;">
+                    margin-bottom: 15px;
+                    background-color: primary;">
         <%= form_with(url: add_snippet_directory_path(@directory), method: :post, local: true) do |form| %>
-          <div class="field modal-text">
+          <div class="field mb-3">
             <%= form.label :snippet_filter, "Filter" %>
-            <%= form.select(:snippet_filter, options_for_select([["My Snippets", "mine"], ["All Snippets", "all"]]), { prompt: "Select a filter" }, class: "filter-select") %>
+            <%= form.select(:snippet_filter, options_for_select([["My Snippets", "mine"], ["All Snippets", "all"]]), { prompt: "Select a filter" }, class: "filter-select form-select") %>
           </div>
-          <div class="field modal-text">
+          <div class="field mb-3">
             <%= form.label :snippet_id %>
-            <%= form.collection_select(:snippet_id, @combined_snippets, :id, :title, { prompt: "Choose a snippet" }, class: "snippet-select") %>
+            <%= form.collection_select(:snippet_id, @combined_snippets, :id, :title, { prompt: "Choose a snippet" }, class: "snippet-select form-select") %>
           </div>
           <div class="actions mt-3">
-            <%= form.submit "+ Add", class: "btn btn-success rounded-pill btn-sm" %>
+            <%= form.submit "+", class: "btn btn-success text-white" %>
           </div>
         <% end %>
       </div>
