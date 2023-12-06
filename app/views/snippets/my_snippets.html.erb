@@ -8,23 +8,24 @@
 <%= render "shared/searchbar"%>
 
   <% if @search_results.present? %>
-  <% if @search_results.count == 1 %>
-    <h2>1 result found for "<%= @query %>" :</h2>
-  <% else %>
-    <h2><%= @search_results.count %> results found for "<%= @query %>" :</h2>
-  <% end %>
+      <% if @search_results.count == 1 %>
+        <h2>1 result found for "<%= @query %>"</h2>
+       <% else %>
+        <h2><%= @search_results.count %> results found for "<%= @query %>"</h2>
+      <% end %>
 
-  <div class="card-container my-5">
-    <% @search_results.each do |result| %>
-      <%= render "shared/cards", snippet: result %>
-    <% end %>
-  </div>
-<% else %>
-  <% if @snippets.present? %>
+        <div class="card-container my-5">
+          <% @search_results.each do |result| %>
+            <%= render "shared/cards", snippet: result %>
+          <% end %>
+        </div>
+
+   <% else %>
+
     <% if @snippets.count == 1 %>
-      <h2>1 result found for "<%= @query %>" :</h2>
-    <% else %>
-      <h2><%= @snippets.count %> results found for "<%= @query %>" :</h2>
+      <h2>You have 1 Snippet</h2>
+     <% else %>
+      <h2>You have <%= @snippets.count %> have Snippets</h2>
     <% end %>
 
     <div class="card-container my-5">
@@ -32,8 +33,4 @@
         <%= render "shared/cards", snippet: snippet %>
       <% end %>
     </div>
-  <% else %>
-    <h2>No results found</h2>
-  <% end %>
 <% end %>
-

@@ -21,17 +21,26 @@ class SnippetsController < ApplicationController
     @snippets = @user.snippets
     @query = params[:query]
     @language = params[:language]
+    @search_results = nil
+
 
     if params[:query].present?
-      @search_filtered = @snippets.where(language: params[:language])
-      @search_results = @search_filtered.pg_search(params[:query])
+      sql_subquery = "title ILIKE :query OR content ILIKE :query"
+      if params[:language]  != "All language"
+      @results = @snippets.where(language: params[:language])
+      @search_results = @results.where(sql_subquery, query: "%#{params[:query]}%")
+      else
+        @search_results = @snippets.where(sql_subquery, query: "%#{params[:query]}%")
+      end
 
-      # Si le paramètre de langue est présent, filtrer les résultats de la recherche par langue
-    elsif params[:query].present? == false && params[:language].present?
-      @snippets = @snippets.where(language: params[:language]) if params[:language].present?
+    elsif !params[:query].present?
+    @search_results = @snippets.where(language: params[:language])
+
+    elsif @search_results.nil? || @search_results.empty?
+      redirect_to my_snippets_path
+      flash[:notice] = "Nothing found for your research."
     else
-    # elsif params[:language] == "All language"
-      @snippets
+      redirect_to my_snippets_path
     end
   end
 
