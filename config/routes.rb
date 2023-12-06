@@ -3,13 +3,17 @@ Rails.application.routes.draw do
   resources :likes
 
 
+
   get 'my_snippets', to: 'snippets#my_snippets', as: :my_snippets
   get 'my_directories', to: 'directories#my_directories', as: :my_directories
 
   resources :like
 
 
+
+
   get 'snippets/my_favorites', to: 'snippets#favorites', as: :my_favorites
+
   resources :snippets do
     post "new_like" , to: 'likes#new_like'
 
@@ -28,6 +32,7 @@ Rails.application.routes.draw do
       post 'add_snippet'
       post 'create_snippet', to: 'snippets#create_snippet_directory'
       get 'remove_snippet'
+      get 'update_snippet'
     end
   end
 

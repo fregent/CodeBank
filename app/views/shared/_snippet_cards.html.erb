@@ -1,5 +1,5 @@
-
 <div class="card m-3 ps-1 ">
+
   <%= link_to snippet_path(snippet), class: "text-decoration-none" do %>
     <div class="content">
       <div class="card_title">
@@ -15,9 +15,12 @@
 
       <p class="mb-3 content-snippet"><% truncate(snippet.content, length: 20, omission: '...') %></p>
 
+
       <div class="bottom ">
         <p class="mb-3"><%= snippet.language %></p>
          <div class="buttons-action d-flex justify-content-between btn-sm">
+
+
         <% if current_user == snippet.user %>
           <%= link_to edit_snippet_path(snippet), class: "btn btn-info edit-pen" do %>
             <i class="fa-solid fa-pencil" data-controller="icon-bounce"></i>
@@ -28,6 +31,7 @@
         <% end %>
         </div>
       </div>
+
 
 <div class="like">
       <%= link_to snippet_new_like_path(snippet), data: { 'turbo-method' => :post } do %>
@@ -44,4 +48,5 @@
   <% end %>
 
 </div>
+
 </div>

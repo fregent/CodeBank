@@ -19,13 +19,18 @@
 
         <%= form_with(url: add_snippet_directory_path(@directory), method: :post, local: true) do |form| %>
           <div class="field">
+            <%= form.label :snippet_filter %>
+            <%= form.select(:snippet_filter, options_for_select([["Mes Snippets", "mine"], ["Tous les Snippets", "all"]]), { prompt: "Select a filter" }, class: "filter-select") %>
+          </div>
+          <div class="field">
             <%= form.label :snippet_id %>
-            <%= form.collection_select(:snippet_id, Snippet.all.where(private: false), :id, :title, prompt: "Choose a snippet", class: "snippet-select") %>
+            <%= form.collection_select(:snippet_id, @combined_snippets, :id, :title, { prompt: "Choose a snippet" }, class: "snippet-select") %>
           </div>
           <div class="actions">
             <%= form.submit "Add Snippet" %>
           </div>
         <% end %>
+
 
 
       </div>
