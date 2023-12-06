@@ -6,12 +6,12 @@
 <div class="border rounded-top-3">
   <div class="buttons-action justify-content-end bg-dark">
     <% if current_user == @directory.user %>
-      <%= link_to "<span class='text-warning d-flex flex-column bd-highlight'><i class='btn btn-warning fa-solid fa-pencil' style='color: white'></i></span>".html_safe, edit_directory_path(@directory) %>
-      <%= link_to "<span class='text-danger d-flex flex-column bd-highlight'><i class='btn btn-danger fa-solid fa-trash-arrow-up' style='color: white'></i></span>".html_safe, directory_path(@directory), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this snippet?" } %>
+      <%= link_to "<span class='text-warning d-flex flex-column bd-highlight'><i class='btn btn-warning rounded-0 fa-solid fa-pencil' style='color: white'></i></span>".html_safe, edit_directory_path(@directory) %>
+      <%= link_to "<span class='text-danger d-flex flex-column bd-highlight'><i class='btn btn-danger rounded-0 fa-solid fa-trash-arrow-up' style='color: white'></i></span>".html_safe, directory_path(@directory), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this snippet?" } %>
     <% end %>
   </div>
 
-  <div class="bg-secondary text-white">
+  <div class="bg-secondary text-white d-flex flex-column">
     <h2><%= @directory.name %></h2>
 
     <div>
@@ -24,7 +24,7 @@
   </div>
 
 
-  <div class="dir-bg">
+  <div class="dir-bg p-3">
     <% if @directory.snippets.any? %>
       <%# Snippets saved in this directory %>
       <% @directory.snippets.each do |snippet| %>
