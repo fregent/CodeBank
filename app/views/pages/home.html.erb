@@ -1,9 +1,6 @@
 <% video_tag 'background-video.mp4', autoplay: :autoplay, loop: :loop, muted: :muted %>
-<div id="bg-video-div">
-  <video autoplay loop muted playsinline id="background-video">
-    <source src="<%= asset_path('background-video.mp4') %>" type="video/mp4">
-  </video>
-  <div class="container-fluid" id="front-layer">
+<div>
+  <div class="container-fluid">
     <div class="row flex-nowrap">
       <div class="col py-3" id="content">
         <h2>Welcome to CodeBank!</h2>

@@ -18,8 +18,15 @@
             <div class="mx-auto">
               <%= render "shared/searchbar" %>
             </div>
-            <%= yield %>
-            <%= render "shared/flashes" %>
+            <div id="bg-video-div">
+              <video autoplay loop muted playsinline id="background-video">
+                <source src="<%= asset_path('background-video.mp4') %>" type="video/mp4">
+              </video>
+              <div id="front-layer">
+                <%= yield %>
+                <%= render "shared/flashes" %>
+              </div>
+            </div>
           </div>
         </main>
       </div>
