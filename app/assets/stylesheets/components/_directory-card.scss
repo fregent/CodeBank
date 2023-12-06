@@ -38,7 +38,8 @@
 .dir-snippet {
   width: fit-content;
   border-style: solid;
-  border-color: $secondary;
+  border-top: 0;
+  border-color: $cb_gray;
   border-radius: 25px;
   border-width: 1px;
 }
