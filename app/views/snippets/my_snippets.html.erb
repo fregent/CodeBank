@@ -1,32 +1,37 @@
-<%= link_to "<= All Directories",  directories_path, class:"btn btn-primary rounded-pill btn-sm", class: "back-btn" %>
-<br>
-<%= render "shared/modal_snippet", snippets: @snippet if user_signed_in? %>
-
-
+<div class="d-flex justify-content-between my-5">
+  <%= link_to "<span><i class='fa-solid fa-code pe-1'></i>All Snippets</span>".html_safe, snippets_path, class:"btn btn-secondary rounded-pill btn-sm" %>
+  <%= render "shared/modal_snippet", snippets: @snippet if user_signed_in? %>
+</div>
 
 <% if @search_results.present? %>
+
   <% if @search_results.count == 1 %>
     <h2>1 result found</h2>
   <% else %>
     <h2><%= @search_results.count %> results found</h2>
   <% end %>
+
   <div class="card-container my-5">
+
     <% @search_results.each do |result| %>
       <% if result.searchable_type == 'Snippet' %>
-        <%= render "shared/cards", snippet: result.searchable %>
+        <%= render "shared/snippet_cards", snippet: result.searchable %>
       <% elsif result.searchable_type == 'Directory' %>
       <% end %>
     <% end %>
+
   </div>
 
 <% else %>
+
   <%= render "shared/filter-form" %>
-<h2 class="mt-5">
-  <%= @snippets.count == 1 ? "You have #{@snippets.count} snippet" : "You have #{@snippets.count} snippets" %>
-</h2>
+  <h2 class="mt-5">
+    <%= @snippets.count == 1 ? "You have #{@snippets.count} snippet" : "You have #{@snippets.count} snippets" %>
+  </h2>
   <div class="card-container my-5">
     <% @snippets.each do |snippet| %>
-      <%= render "shared/cards", snippet: snippet %>
+      <%= render "shared/snippet_cards", snippet: snippet %>
     <% end %>
   </div>
+
 <% end %>

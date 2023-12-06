@@ -1,23 +1,22 @@
-<%= link_to directory_path(directory), class:"text-decoration-none" do %>
-  <div class="directory-card m-3">
-    <div class="content">
-      <div class="directory-card-name">
-        <h3 class="p-4 text-white">
-          <%= directory.name %>
-        </h3>
-      </div>
-      <div class="buttons-action position-absolute bottom-0 end-0">
-        <% if current_user == directory.user %>
+<div class="directory-card m-4" data-controller="directories-buttons">
+  <div class="buttons-action me-auto d-none" data-target="directories-buttons.buttonsAction">
+    <% if current_user == directory.user %>
 
-          <%= link_to edit_directory_path(directory), class: "btn btn-info edit-pen" do %>
-            <i class="fa-solid fa-pencil" data-controller="icon-bounce"></i>
-          <% end %>
+      <%= link_to edit_directory_path(directory), class: "btn btn-info edit-pen" do %>
+        <i class="fa-solid fa-pencil" style="color: yellow" data-controller="icon-bounce"></i>
+      <% end %>
 
-          <%= link_to directory_path(directory), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce directory?" }, class: "btn btn-info btn-sup" do %>
-            <i class="fa-solid fa-trash-arrow-up" data-controller="icon-bounce"></i>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
+      <%= link_to directory_path(directory), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this directory?" }, class: "btn btn-info btn-sup" do %>
+        <i class="fa-solid fa-trash-arrow-up" style="color: red" data-controller="icon-bounce"></i>
+      <% end %>
+    <% end %>
   </div>
-<% end %>
+  <%= link_to directory_path(directory), class:"text-decoration-none" do %>
+    <div class="directory-icon">
+      <i class="fa-solid fa-folder-closed fa-7x"></i>
+    </div>
+    <div class="directory-card-name">
+      <span class="align-middle"><%= directory.name %></span>
+    </div>
+  <% end %>
+</div>
