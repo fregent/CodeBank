@@ -3,20 +3,33 @@ class SnippetsController < ApplicationController
   def index
 
     @snippet = Snippet.new
-    @snippets = Snippet.all.where(private: false)
     @user = current_user
+    @public_snippets = Snippet.all.where(private: false)
+    @snippets = @public_snippets.where.not(user: @user)
+    @query = params[:query]
+    @language = params[:language]
     # @snippets = Snippet.where(
     #   '(user_id = ?) OR (private = ?)',
     #   current_user.id, false
     # )
     if params[:query].present?
-      @query = params[:query]
-      @search_results = PgSearch.multisearch(@query)
-    else
-      @snippets
-      @snippets = @snippets.where(language: params[:language]) if params[:language].present?
-    end
+      sql_subquery = "title ILIKE :query OR content ILIKE :query"
+      if params[:language]  != "All language"
+      @results = @snippets.where(language: params[:language])
+      @search_results = @results.where(sql_subquery, query: "%#{params[:query]}%")
+      else
+        @search_results = @snippets.where(sql_subquery, query: "%#{params[:query]}%")
+      end
 
+    elsif !params[:query].present?
+    @search_results = @snippets.where(language: params[:language])
+
+    elsif @search_results.nil? || @search_results.empty?
+      redirect_to my_snippets_path
+      flash[:notice] = "Nothing found for your research."
+    else
+      redirect_to my_snippets_path
+    end
   end
 
   def my_snippets
@@ -24,18 +37,33 @@ class SnippetsController < ApplicationController
     @snippet = Snippet.new
     @user = current_user
     @snippets = @user.snippets
-    # @snippets = Snippet.where(
-    #   '(user_id = ?) OR (private = ?)',
-    #   current_user.id, false
-    # )
-    if params[:query].present?
-      @search_results = PgSearch.multisearch(params[:query])
-    else
-      @snippets
-      @snippets = @snippets.where(language: params[:language]) if params[:language].present?
-    end
+    @query = params[:query]
+    @language = params[:language]
+    @search_results = nil
 
+
+    if params[:query].present?
+      sql_subquery = "title ILIKE :query OR content ILIKE :query"
+      if params[:language]  != "All language"
+      @results = @snippets.where(language: params[:language])
+      @search_results = @results.where(sql_subquery, query: "%#{params[:query]}%")
+      else
+        @search_results = @snippets.where(sql_subquery, query: "%#{params[:query]}%")
+      end
+
+    elsif !params[:query].present?
+    @search_results = @snippets.where(language: params[:language])
+
+    elsif @search_results.nil? || @search_results.empty?
+      redirect_to my_snippets_path
+      flash[:notice] = "Nothing found for your research."
+    else
+      redirect_to my_snippets_path
+    end
   end
+
+
+
 
 def create_snippet_directory
     @directory = Directory.find(params[:id])
@@ -113,11 +141,15 @@ def create_snippet_directory
     @snippet = Snippet.find(params[:id])
     @user = current_user
     @user_destroyer = @snippet.user
-    @snippet.destroy
-
     if @user == @user_destroyer
-      flash[:notice] = "Snippet deleted with success."
+      DirectoriesSnippet.where(snippet_id: @snippet.id).each do |dir|
+        dir.destroy
+      end
+      Like.where(snippet_id: @snippet.id).each do |like|
+        like.destroy
+      end
       @snippet.destroy
+      flash[:notice] = "Snippet deleted with success."
     end
     redirect_to snippets_path
   end

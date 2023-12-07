@@ -1,0 +1,51 @@
+ <div class="card-container my-5">
+      <% @snippets.each do |result| %>
+      <div data-search-target="list">
+        <div class="card m-3">
+  <%= link_to snippet_path(result), class: "text-decoration-none" do %>
+    <div class="content">
+      <div>
+        <h3 class="mb-3 fw-bold font-size-lg">
+          <%= result.title %>
+        </h3>
+      </div>
+
+      <div class="opacity-50 h-25">
+        <h6 class="mb-3 fw-light fst-italic font-size-sm">
+          @<%= result.user.username %>
+        </h6>
+      </div>
+      <p class="mb-3 content-snippet"><% truncate(result.content, length: 20, omission: '...') %></p>
+      <div>
+        <p class="mb-3"><%= result.language %></p>
+      </div>
+
+      <p class="mb-3"><% result.created_at.strftime("%d/%m/%Y") %></p>
+
+      <%= link_to snippet_new_like_path(result), data: { 'turbo-method' => :post } do %>
+        <% if Like.where(user: @current_user, snippet: result).count == 0 %>
+          <i data-controller="like" data-action="click->like#like" class="far fa-heart" data-like-target="heart"></i>
+        <% else %>
+          <i data-controller="like" data-action="click->like#like" class="fas fa-heart" data-like-target="heart"></i>
+
+        <% end %>
+          <%# <span class="like-count"><%= @post.likes.count %>
+      <% end %>
+
+      <div class="buttons-action d-flex justify-content-between">
+        <% if current_user == result.user %>
+          <%= link_to edit_snippet_path(result), class: "btn btn-info edit-pen" do %>
+            <i class="fa-solid fa-pencil" data-controller="icon-bounce"></i>
+          <% end %>
+          <%= link_to snippet_path(result), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette snippet?" }, class: "btn btn-info btn-sup" do %>
+            <i class="fa-solid fa-trash-arrow-up" data-controller="icon-bounce"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+      </div>
+      <% end %>
+   </div>

@@ -1,5 +1,6 @@
-<div class="card m-3 ps-1 ">
-
+<div data-controller="toggle">
+<div class="card m-3 ps-1"
+data-toggle-target="togglableElement">
   <%= link_to snippet_path(snippet), class: "text-decoration-none" do %>
     <div class="content text-start">
       <div class="card_title">
@@ -43,4 +44,5 @@
       </div>
     </div>
   <% end %>
+</div>
 </div>

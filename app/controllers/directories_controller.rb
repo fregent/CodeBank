@@ -23,10 +23,10 @@ class DirectoriesController < ApplicationController
       @directories = @user.directories
       snippet_id = params[:snippet_id]
       @selected_snippet = Snippet.find_by(id: snippet_id)
-      @search_results = PgSearch.multisearch(params[:query])
-
+      @query = params[:query]
       if params[:query].present?
-        @search_results = PgSearch.multisearch(params[:query])
+        # Utilisation de l'opérateur de correspondance partielle pour améliorer la recherche
+        @search_results = @directories.pg_search_directory(params[:query])
       else
         @directories
       end

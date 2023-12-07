@@ -15,13 +15,18 @@
                   margin-top: 15px;
                   margin-bottom: 15px;">
 
+
         <%= simple_form_for [@snippet] do |f| %>
-          <div class="modal-text">
+          <div class="modal-text"
+          data-controller="toggle">
             <%= f.input :title, as: :string, label: 'Title', placeholder: "Type your code's title here...", input_html: { style: 'border-color: black;' } %>
-            <%= f.input :content, as: :text, label: 'Your code', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window', id: 'your-textarea' } %>
-            <%= f.input :description, as: :text, label: 'Description', placeholder: "Explain what your code does here...", input_html: { style: 'border-color: black; height: 128px;' } %>
-            <%= f.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code', placeholder: "What language?", input_html: { style: 'border-color: black;' } %>
-            <%= f.input :private, as: :boolean, label: 'Private? 🔒', checked_value: 'true', unchecked_value: 'false', input_html: { style: 'border-color: black;' } %>
+            <%= f.input :content, as: :text, label: 'Your code', placeholder: "Enter your code here", input_html: { style: 'border-color: black;', class: 'code-window' , id: 'your-textarea' } %>
+            <button data-action="click->toggle#fire" class="btn btn-outline-primary mb-3">+ Add a description of your code</button>
+            <div data-toggle-target="togglableElement" class="d-none">
+            <%= f.input :description, as: :text, label: 'Description', placeholder: "Explain what your code does here...", input_html: { style: 'border-color: black;' } %>
+            </div>
+            <%= f.input :language, collection: [ "Ruby", "JavaScript", "HTML", "CSS", "Java", "Python", "PHP", "C", "TypeScript", "Swift", "Bash", "Multiple", "Objective-C", "C++", "C#"], label: 'Select the language of your code', placeholder: "What language?", input_html: { style: 'border-color: black;'} %>
+            <%= f.input :private, as: :boolean, label: 'Private?', checked_value: 'true', unchecked_value: 'false', input_html: { style: 'border-color: black;' } %>
             <%= f.button :submit, "Save", class: "btn btn-success mt-3 text-center", id: :btn_add %>
           </div>
         <% end %>
