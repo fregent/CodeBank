@@ -2,11 +2,11 @@
   <div class="buttons-action me-auto d-none" data-target="directories-buttons.buttonsAction">
     <% if current_user == directory.user %>
 
-      <%= link_to edit_directory_path(directory), class: "btn btn-info edit-pen" do %>
+      <%= link_to edit_directory_path(directory), class: "btn edit-pen" do %>
         <i class="fa-solid fa-pencil" style="color: yellow" data-controller="icon-bounce"></i>
       <% end %>
 
-      <%= link_to directory_path(directory), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this directory?" }, class: "btn btn-info btn-sup" do %>
+      <%= link_to directory_path(directory), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this directory?" }, class: "btn btn-sup" do %>
         <i class="fa-solid fa-trash-arrow-up" style="color: red" data-controller="icon-bounce"></i>
       <% end %>
     <% end %>
