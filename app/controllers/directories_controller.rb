@@ -117,7 +117,7 @@ class DirectoriesController < ApplicationController
         flash[:alert] = "Failed to update directory."
       end
 
-      redirect_to edit_directory_path(@directory)
+      redirect_to my_directories_path
     end
 
 
