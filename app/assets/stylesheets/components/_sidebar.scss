@@ -2,6 +2,7 @@
   align-items: stretch;
   display: flex;
   width: 100%;
+  overflow: visible;
 }
 
 #sidebar {
@@ -24,10 +25,9 @@
 .main {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: auto;
   width: 100%;
   // overflow: hidden;
-  transition: all 0.35 ease-in-out;
 }
 
 .sidebar-logo {
