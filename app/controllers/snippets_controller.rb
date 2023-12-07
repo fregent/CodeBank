@@ -3,8 +3,9 @@ class SnippetsController < ApplicationController
   def index
 
     @snippet = Snippet.new
-    @snippets = Snippet.all.where(private: false)
     @user = current_user
+    @public_snippets = Snippet.all.where(private: false)
+    @snippets = @public_snippets.where.not(user: @user)
     @query = params[:query]
     @language = params[:language]
     # @snippets = Snippet.where(
@@ -140,11 +141,15 @@ def create_snippet_directory
     @snippet = Snippet.find(params[:id])
     @user = current_user
     @user_destroyer = @snippet.user
-    @snippet.destroy
-
     if @user == @user_destroyer
-      flash[:notice] = "Snippet deleted with success."
+      DirectoriesSnippet.where(snippet_id: @snippet.id).each do |dir|
+        dir.destroy
+      end
+      Like.where(snippet_id: @snippet.id).each do |like|
+        like.destroy
+      end
       @snippet.destroy
+      flash[:notice] = "Snippet deleted with success."
     end
     redirect_to snippets_path
   end

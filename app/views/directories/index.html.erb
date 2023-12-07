@@ -16,7 +16,7 @@
   <div class="card-container my-5">
     <% @search_results.each do |result| %>
       <% if result.searchable_type == 'Snippet' %>
-        <%= render "shared/cards", snippet: result.searchable %>
+        <%= render "shared/snippet_cards", snippet: result.searchable %>
       <% elsif result.searchable_type == 'Directory' %>
         <%= render "shared/directory_cards", directory: result.searchable %>
       <% end %>
