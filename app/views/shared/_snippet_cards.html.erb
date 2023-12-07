@@ -15,7 +15,6 @@
 
       <p class="mb-3 content-snippet"><% truncate(snippet.content, length: 20, omission: '...') %></p>
 
-
       <div class="bottom ">
         <p class="mb-3"><%= snippet.language %></p>
          <div class="buttons-action d-flex justify-content-between btn-sm">
@@ -33,20 +32,15 @@
       </div>
 
 
-<div class="like">
-      <%= link_to snippet_new_like_path(snippet), data: { 'turbo-method' => :post } do %>
-        <% if Like.where(user: @current_user, snippet: snippet).count == 0 %>
-          <i data-controller="like" data-action="click->like#like" class="far fa-heart red-heart " data-like-target="heart"></i>
-        <% else %>
-          <i data-controller="like" data-action="click->like#like" class="fas fa-heart red-heart" data-like-target="heart"></i>
-
+      <div class="like">
+        <%= link_to snippet_new_like_path(snippet), data: { 'turbo-method' => :post } do %>
+          <% if Like.where(user: @current_user, snippet: snippet).count == 0 %>
+            <i data-controller="like" data-action="click->like#like" class="far fa-heart red-heart " data-like-target="heart"></i>
+          <% else %>
+            <i data-controller="like" data-action="click->like#like" class="fas fa-heart red-heart" data-like-target="heart"></i>
+          <% end %>
         <% end %>
-         <% end %>
-
-
+      </div>
     </div>
   <% end %>
-
-</div>
-
 </div>
