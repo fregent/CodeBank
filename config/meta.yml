@@ -8,6 +8,6 @@ meta_description: "With CodeBank, you can effortlessly store your code snippets 
 This platform is 100% free and designed by developers for developers.
 Don't hesitate for a moment – sign in now and take your coding experience to the next level!"
 
-meta_image: "meta_image.png" # should exist in `app/assets/images/`
+meta_image: "meta_image.png"
 
-twitter_account: “” # required for Twitter Cards
+twitter_account: “”
