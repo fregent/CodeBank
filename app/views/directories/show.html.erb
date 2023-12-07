@@ -35,7 +35,7 @@
         <div class="dir-snippet">
           <%= render "shared/snippet_cards", snippet: snippet %>
           <% link_to "Update Snippet", update_snippet_directory_path(@directory, snippet_id: @snippet.id), method: :patch, remote: true, data: { turbo_frame: "your_directory_frame_id" } %>
-          <%= link_to "Remove", remove_snippet_directory_path(@directory, snippet_id: snippet.id), class: "btn btn-danger rounded-pill btn-sm text-white", data: { method: :delete, turbo_confirm: "Are you sure you want to remove this snippet from the directory?" } %>
+          <%= link_to "Remove", remove_snippet_directory_path(@directory, snippet_id: snippet.id), class: "btn btn-danger btn-sm text-white", data: { method: :delete, turbo_confirm: "Are you sure you want to remove this snippet from the directory?" } %>
         </div>
       <% end %>
     <% else %>
