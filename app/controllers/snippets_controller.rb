@@ -5,18 +5,30 @@ class SnippetsController < ApplicationController
     @snippet = Snippet.new
     @snippets = Snippet.all.where(private: false)
     @user = current_user
+    @query = params[:query]
+    @language = params[:language]
     # @snippets = Snippet.where(
     #   '(user_id = ?) OR (private = ?)',
     #   current_user.id, false
     # )
     if params[:query].present?
-      @query = params[:query]
-      @search_results = PgSearch.multisearch(@query)
-    else
-      @snippets
-      @snippets = @snippets.where(language: params[:language]) if params[:language].present?
-    end
+      sql_subquery = "title ILIKE :query OR content ILIKE :query"
+      if params[:language]  != "All language"
+      @results = @snippets.where(language: params[:language])
+      @search_results = @results.where(sql_subquery, query: "%#{params[:query]}%")
+      else
+        @search_results = @snippets.where(sql_subquery, query: "%#{params[:query]}%")
+      end
 
+    elsif !params[:query].present?
+    @search_results = @snippets.where(language: params[:language])
+
+    elsif @search_results.nil? || @search_results.empty?
+      redirect_to my_snippets_path
+      flash[:notice] = "Nothing found for your research."
+    else
+      redirect_to my_snippets_path
+    end
   end
 
   def my_snippets
