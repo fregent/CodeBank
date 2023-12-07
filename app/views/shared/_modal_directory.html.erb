@@ -19,7 +19,7 @@
           <div class="modal-text">
             <%= f.input :name, as: :string, label: "Directory's name:", placeholder: "Type your directory's name here...", input_html: { style: 'border-color: black;' } %>
             <%= f.input :private, as: :boolean, label: 'Private? 🔒', checked_value: 'true', unchecked_value: 'false', input_html: { style: 'border-color: black;' } %>
-            <%= f.button :submit, class: "btn btn-primary mt-3", id: :btn_add %>
+            <%= f.button :submit, "+", class: "text-white btn btn-success mt-3", id: :btn_add %>
           </div>
         <% end %>
 
