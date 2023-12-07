@@ -3,3 +3,17 @@
   justify-content: space-evenly !important;
   width: 100%;
 }
+
+.snippet-social-bar{
+  width: 80%;
+  text-align: start;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+}
+
+.snippet-description {
+  width: 80%;
+}
