@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
 
-  resources :likes
+  resources :likes do
+    resources :reviews, only: [:new, :create, :destroy]
+  end
+
+
 
   get 'my_snippets', to: 'snippets#my_snippets', as: :my_snippets
   get 'my_directories', to: 'directories#my_directories', as: :my_directories
+
+  resources :like
+
+
+
 
   get 'snippets/my_favorites', to: 'snippets#favorites', as: :my_favorites
 
