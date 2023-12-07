@@ -44,7 +44,7 @@ class DirectoriesController < ApplicationController
       else
         flash[:alert] = 'This snippet already exists in this directory!'
       end
-      redirect_to @directory
+      redirect_to directory_path(@directory)
     end
 
     def create_snippet
