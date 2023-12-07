@@ -68,13 +68,6 @@
 
 
   <% if user_signed_in? %>
-    <% if current_user == @snippet.user %>
-      <div class="snippet-show-buttons">
-        <%= link_to "<span class='text-warning d-flex flex-column bd-highlight'><i class='btn btn-warning fa-solid fa-pencil' style='color: white'></i>Edit</span>".html_safe, edit_snippet_path(@snippet) %>
-        <%= link_to "<span class='text-danger d-flex flex-column bd-highlight'><i class='btn btn-danger fa-solid fa-trash-arrow-up' style='color: white'></i>Delete</span>".html_safe, snippet_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this snippet?" } %>
-      </div>
-    <% end %>
-
     <div class="snippet-social-bar border-top border-bottom mb-4">
       <%= link_to snippet_new_like_path(@snippet), data: { 'turbo-method' => :post } do %>
         <% if Like.where(user: @current_user, snippet: @snippet).count == 0 %>
@@ -83,7 +76,11 @@
           <i data-controller="like" data-action="click->like#like" class="fas fa-heart red-heart fa-2x" data-like-target="heart"></i>
         <% end %>
       <% end %>
-      <h6 class="fw-light text-muted">Last updated by <%= @snippet.user.username %> on <%= @snippet.updated_at %></h6>
+      <% if current_user == @snippet.user %>
+        <%= link_to "<i class='fa-solid fa-pencil fa-2x' style='color: orange'></i>".html_safe, edit_snippet_path(@snippet) %>
+        <%= link_to "<i class='fa-solid fa-trash-arrow-up fa-2x' style='color: red'></i>".html_safe, snippet_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this snippet?" } %>
+        <h6 class="fw-light text-muted">Last updated by <%= @snippet.user.username %> on <%= @snippet.updated_at %></h6>
+        <% end %>
     </div>
   <% end %>
 
