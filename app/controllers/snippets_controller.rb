@@ -14,7 +14,7 @@ class SnippetsController < ApplicationController
     # )
     if params[:query].present?
       sql_subquery = "title ILIKE :query OR content ILIKE :query"
-      if params[:language]  != "All language"
+      if params[:language]  != "All Languages"
       @results = @snippets.where(language: params[:language])
       @search_results = @results.where(sql_subquery, query: "%#{params[:query]}%")
       else
@@ -44,7 +44,7 @@ class SnippetsController < ApplicationController
 
     if params[:query].present?
       sql_subquery = "title ILIKE :query OR content ILIKE :query"
-      if params[:language]  != "All language"
+      if params[:language]  != "All Languages"
       @results = @snippets.where(language: params[:language])
       @search_results = @results.where(sql_subquery, query: "%#{params[:query]}%")
       else
