@@ -82,8 +82,8 @@
       <% if current_user == @snippet.user %>
         <%= link_to "<i class='fa-solid fa-pencil fa-2x' style='color: orange'></i>".html_safe, edit_snippet_path(@snippet) %>
         <%= link_to "<i class='fa-solid fa-trash-arrow-up fa-2x' style='color: red'></i>".html_safe, snippet_path(@snippet), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this snippet?" } %>
-        <h6 class="fw-light text-muted">Last updated by <%= @snippet.user.username %> on <%= @snippet.updated_at %></h6>
-        <% end %>
+      <% end %>
+      <h6 class="fw-light text-muted">Last updated by <%= @snippet.user.username %> on <%= @snippet.updated_at %></h6>
     </div>
   <% end %>
 
